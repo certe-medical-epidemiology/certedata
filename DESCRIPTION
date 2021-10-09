@@ -42,6 +42,7 @@ Imports:
   tidyr,
   xml2
 Suggests: 
+  rstudioapi,
   testthat (>= 2.0.0)
 License: GPL-2
 Encoding: UTF-8
