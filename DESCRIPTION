@@ -1,6 +1,6 @@
-Package: certetemplate
-Title: A Certe Package for ...
-Version: 0.0.1.9000
+Package: certedata
+Title: A Certe Package for Loading Certe Universe
+Version: 4.0.0
 Authors@R: c(
   person(given = c("Matthijs", "S."), 
          family = "Berends",
@@ -8,18 +8,40 @@ Authors@R: c(
   person(given = c("Erwin", "E.", "A."),
          family = "Hassing", 
          role = c("aut")),
-  person(given = c("Erwin"),
-         family = "Dijkstra", 
-         role = c("aut")),
   person(given = "Certe Medical Diagnostics & Advice Foundation",
          role = c("cph", "fnd")))
-Description: A Certe R Package for ... .
+Description: A Certe R Package for loading all R packages in the Certe
+  Medical Epidemiology universe, based on the tidyverse/tidyverse repo.
   This package is part of the 'certedata' universe.
-URL: https://github.com/certe-medical-epidemiology
+URL: https://github.com/certe-medical-epidemiology/certedata
 Depends: 
-    R (>= 3.6.0)
+   R (>= 3.6.0)
+Imports:
+  AMR (>= 1.7.1),
+  cleaner,
+  crayon,
+  dplyr,
+  dtplyr,
+  extrafont,
+  flextable,
+  forcats,
+  ggplot2,
+  ggtext,
+  glue,
+  httr,
+  lubridate,
+  magrittr,
+  purrr,
+  readr,
+  readxl,
+  rvest,
+  skimr,
+  stringr,
+  tibble,
+  tidyr,
+  xml2
 Suggests: 
-    testthat (>= 2.0.0)
+  testthat (>= 2.0.0)
 License: GPL-2
 Encoding: UTF-8
 LazyData: true
