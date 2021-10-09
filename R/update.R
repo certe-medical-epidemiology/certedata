@@ -90,7 +90,7 @@ certedata_sitrep <- function() {
 #' @export
 certedata_deps <- function(recursive = FALSE, repos = getOption("repos")) {
   pkgs <- utils::available.packages(repos = repos)
-  deps <- tools::package_dependencies("certetools", pkgs, recursive = recursive)
+  deps <- tools::package_dependencies(core, pkgs, recursive = recursive)
 
   pkg_deps <- unique(sort(unlist(deps)))
 
