@@ -1,5 +1,5 @@
 Package: certedata
-Title: A Certe Package for Loading Certe Universe
+Title: A Certe R Package for Loading Certe Universe
 Version: 4.0.0
 Authors@R: c(
   person(given = c("Matthijs", "S."), 
