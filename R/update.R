@@ -113,7 +113,7 @@ certedata_deps <- function(recursive = FALSE, repos = getOption("repos")) {
 }
 
 packageVersion <- function(pkg) {
-  if (rlang::is_installed(pkg)) {
+  if (all(sapply(pkg, function(x) isTRUE(requireNamespace(x, quietly = TRUE))))) {
     utils::packageVersion(pkg)
   } else {
     0

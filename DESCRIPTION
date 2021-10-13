@@ -16,33 +16,33 @@ Description: A Certe R Package for loading all R packages in the Certe
   This package is part of the 'certedata' universe.
 URL: https://github.com/certe-medical-epidemiology/certedata
 Depends: 
-   R (>= 3.6.0)
+  R (>= 3.6.0)
 Imports:
+  certetoolbox,
+  certemail,
   AMR (>= 1.7.1),
   cleaner (>= 1.5.3),
-  crayon,
+  cli,
+  crayon (>= 1.4.0),
   dplyr (>= 1.0.6),
   dtplyr,
   extrafont,
   flextable,
-  forcats,
   ggplot2 (>= 3.3.0),
   ggtext (>= 0.1.0),
-  glue,
-  httr,
   lubridate,
   magrittr,
   purrr,
   readr,
   readxl,
+  rstudioapi,
   rvest,
   skimr,
   stringr,
   tibble,
   tidyr,
   xml2
-Suggests: 
-  rstudioapi,
+Suggests:
   testthat (>= 2.0.0)
 License: GPL-2
 Encoding: UTF-8

@@ -4,7 +4,7 @@
 \name{certedata-package}
 \alias{certedata}
 \alias{certedata-package}
-\title{certedata: A Certe Package for Loading Certe Universe}
+\title{certedata: A Certe R Package for Loading Certe Universe}
 \description{
 A Certe R Package for loading all R packages in the Certe
   Medical Epidemiology universe, based on the tidyverse/tidyverse repo.

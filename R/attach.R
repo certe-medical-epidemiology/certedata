@@ -18,10 +18,11 @@
 # ===================================================================== #
 
 core <- c(sort(c("ggplot2", "tibble", "tidyr", "readr", "readxl",
-                 "purrr", "dplyr", "stringr", "forcats", "lubridate",
-                 "xml2", "httr", "rvest", "glue", "dtplyr",
+                 "purrr", "dplyr", "stringr", "lubridate",
+                 "xml2", "rvest", "dtplyr",
                  "cleaner", "AMR", "extrafont", "magrittr", "ggtext", "skimr")),
-          "flextable")
+          "flextable" ,
+          "certetoolbox", "certemail")
 base_pkgs <- rownames(installed.packages()[which(installed.packages()[, "Priority"] == "base"), ])
 
 core_unloaded <- function() {
