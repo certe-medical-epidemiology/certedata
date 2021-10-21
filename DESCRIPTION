@@ -1,6 +1,6 @@
 Package: certedata
 Title: A Certe R Package for Loading Certe Universe
-Version: 4.0.0
+Version: 4.0.1
 Authors@R: c(
   person(given = c("Matthijs", "S."), 
          family = "Berends",
@@ -14,10 +14,11 @@ Authors@R: c(
 Description: A Certe R Package for loading all R packages in the Certe
   Medical Epidemiology universe, based on the tidyverse/tidyverse repo.
   This package is part of the 'certedata' universe.
-URL: https://github.com/certe-medical-epidemiology/certedata
+URL: https://certe-medical-epidemiology.github.io/certedata, https://github.com/certe-medical-epidemiology/certedata
 Depends: 
   R (>= 3.6.0)
 Imports:
+  certestyle,
   certetoolbox,
   certemail,
   AMR (>= 1.7.1),

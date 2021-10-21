@@ -4,3 +4,4 @@
 ^\.github$
 ^certedata\.Rproj$
 ^_pkgdown\.yml$
+^logo\.svg$

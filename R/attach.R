@@ -22,7 +22,7 @@ core <- c(sort(c("ggplot2", "tibble", "tidyr", "readr", "readxl",
                  "xml2", "rvest", "dtplyr",
                  "cleaner", "AMR", "extrafont", "magrittr", "ggtext", "skimr")),
           "flextable" ,
-          "certetoolbox", "certemail")
+          "certestyle", "certetoolbox", "certemail")
 base_pkgs <- rownames(installed.packages()[which(installed.packages()[, "Priority"] == "base"), ])
 
 core_unloaded <- function() {
