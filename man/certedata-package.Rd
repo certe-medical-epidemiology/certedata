@@ -13,6 +13,7 @@ A Certe R Package for loading all R packages in the Certe
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://certe-medical-epidemiology.github.io/certedata}
   \item \url{https://github.com/certe-medical-epidemiology/certedata}
 }
 

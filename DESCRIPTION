@@ -1,6 +1,6 @@
 Package: certedata
 Title: A Certe R Package for Loading Certe Universe
-Version: 4.0.1
+Version: 4.0.2
 Authors@R: c(
   person(given = c("Matthijs", "S."), 
          family = "Berends",
