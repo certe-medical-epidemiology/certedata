@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get a situation report on the certedata — certedata_sitrep • certedata</title>
+<title>Data Sets with Geometries of Dutch Provinces, Municipalities and Zipcodes — cbs_data • certedata</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,11 +46,8 @@
 
 
 
-<meta property="og:title" content="Get a situation report on the certedata — certedata_sitrep" />
-<meta property="og:description" content="This function gives a quick overview of the versions of R and RStudio as
-well as all certedata packages. It's primarily designed to help you get
-a quick idea of what's going on when you're helping someone else debug
-a problem." />
+<meta property="og:title" content="Data Sets with Geometries of Dutch Provinces, Municipalities and Zipcodes — cbs_data" />
+<meta property="og:description" content="Data Sets with Geometries of Dutch Provinces, Municipalities and Zipcodes" />
 <meta property="og:image" content="https://certe-medical-epidemiology.github.io/certedata/logo.svg" />
 
 
@@ -139,21 +136,48 @@ a problem." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get a situation report on the certedata</h1>
-    <small class="dont-index">Source: <a href='https://github.com/certe-medical-epidemiology/certedata/blob/master/R/update.R'><code>R/update.R</code></a></small>
-    <div class="hidden name"><code>certedata_sitrep.Rd</code></div>
+    <h1>Data Sets with Geometries of Dutch Provinces, Municipalities and Zipcodes</h1>
+    <small class="dont-index">Source: <a href='https://github.com/certe-medical-epidemiology/certedata/blob/master/R/data.R'><code>R/data.R</code></a></small>
+    <div class="hidden name"><code>cbs_data.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function gives a quick overview of the versions of R and RStudio as
-well as all certedata packages. It's primarily designed to help you get
-a quick idea of what's going on when you're helping someone else debug
-a problem.</p>
+    <p>Data Sets with Geometries of Dutch Provinces, Municipalities and Zipcodes</p>
     </div>
 
-    <pre class="usage"><span class='fu'>certedata_sitrep</span><span class='op'>(</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='va'>gemeenten</span>
+
+<span class='va'>ggdregios</span>
+
+<span class='va'>jeugdregios</span>
+
+<span class='va'>nuts3regios</span>
+
+<span class='va'>postcodes4</span>
+
+<span class='va'>provincies</span>
+
+<span class='va'>veiligheidsregios</span></pre>
 
 
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+
+    <p>A sf/<a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a> with 3 variables:</p><ul>
+<li><p><code>...</code><br /> column name of the identifier, which is the singular form of the name of the data set (i.e., <code>gemeenten$gemeente</code>)</p></li>
+<li><p><code>area_km2</code><br /> area in square kilometres</p></li>
+<li><p><code>geometry</code><br /> the polygonal form of the area</p></li>
+</ul>
+
+<p>An object of class <code>sf</code> (inherits from <code>data.frame</code>) with 25 rows and 3 columns.</p>
+<p>An object of class <code>sf</code> (inherits from <code>data.frame</code>) with 42 rows and 3 columns.</p>
+<p>An object of class <code>sf</code> (inherits from <code>data.frame</code>) with 40 rows and 3 columns.</p>
+<p>An object of class <code>sf</code> (inherits from <code>data.frame</code>) with 1060 rows and 3 columns.</p>
+<p>An object of class <code>sf</code> (inherits from <code>data.frame</code>) with 12 rows and 3 columns.</p>
+<p>An object of class <code>sf</code> (inherits from <code>data.frame</code>) with 25 rows and 3 columns.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>All data sets (maps) contain all of the Netherlands, except for postcodes4 which only contains the northern Netherlands.</p>
+<p>See <a href='https://github.com/certe-medical-epidemiology/certedata/blob/main/data-raw/update_gis.R'>the repository file</a> to update these data sets.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get a situation report on the certedata — certedata_sitrep • certedata</title>
+<title>Distance from Zipcode to Zipcode — postcodes4_afstanden • certedata</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,11 +46,8 @@
 
 
 
-<meta property="og:title" content="Get a situation report on the certedata — certedata_sitrep" />
-<meta property="og:description" content="This function gives a quick overview of the versions of R and RStudio as
-well as all certedata packages. It's primarily designed to help you get
-a quick idea of what's going on when you're helping someone else debug
-a problem." />
+<meta property="og:title" content="Distance from Zipcode to Zipcode — postcodes4_afstanden" />
+<meta property="og:description" content="This data set was obtained by calculating the difference from the middle point of a zipcode geometry to another zipcode geometry (using the postcodes data set and the sf package)." />
 <meta property="og:image" content="https://certe-medical-epidemiology.github.io/certedata/logo.svg" />
 
 
@@ -139,20 +136,25 @@ a problem." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get a situation report on the certedata</h1>
-    <small class="dont-index">Source: <a href='https://github.com/certe-medical-epidemiology/certedata/blob/master/R/update.R'><code>R/update.R</code></a></small>
-    <div class="hidden name"><code>certedata_sitrep.Rd</code></div>
+    <h1>Distance from Zipcode to Zipcode</h1>
+    <small class="dont-index">Source: <a href='https://github.com/certe-medical-epidemiology/certedata/blob/master/R/data.R'><code>R/data.R</code></a></small>
+    <div class="hidden name"><code>postcodes4_afstanden.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function gives a quick overview of the versions of R and RStudio as
-well as all certedata packages. It's primarily designed to help you get
-a quick idea of what's going on when you're helping someone else debug
-a problem.</p>
+    <p>This data set was obtained by calculating the difference from the middle point of a zipcode geometry to another zipcode geometry (using the <a href='postcodes.html'>postcodes</a> data set and the <code>sf</code> package).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>certedata_sitrep</span><span class='op'>(</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='va'>postcodes4_afstanden</span></pre>
 
+
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+
+    <p>A <a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a> with 562,330 observations and 3 variables:</p><ul>
+<li><p><code>postcode.x</code><br /> zipcode (PC4)</p></li>
+<li><p><code>postcode.y</code><br /> zipcode (PC4)</p></li>
+<li><p><code>afstand_km</code><br /> distance in kilometres</p></li>
+</ul>
 
 
   </div>

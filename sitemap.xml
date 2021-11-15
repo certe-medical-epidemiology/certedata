@@ -4,6 +4,9 @@
     <loc>https://certe-medical-epidemiology.github.io/certedata/index.html</loc>
   </url>
   <url>
+    <loc>https://certe-medical-epidemiology.github.io/certedata/reference/cbs_data.html</loc>
+  </url>
+  <url>
     <loc>https://certe-medical-epidemiology.github.io/certedata/reference/certedata-package.html</loc>
   </url>
   <url>
@@ -20,5 +23,14 @@
   </url>
   <url>
     <loc>https://certe-medical-epidemiology.github.io/certedata/reference/certedata_update.html</loc>
+  </url>
+  <url>
+    <loc>https://certe-medical-epidemiology.github.io/certedata/reference/inwoners_per_postcode_leeftijd.html</loc>
+  </url>
+  <url>
+    <loc>https://certe-medical-epidemiology.github.io/certedata/reference/postcodes.html</loc>
+  </url>
+  <url>
+    <loc>https://certe-medical-epidemiology.github.io/certedata/reference/postcodes4_afstanden.html</loc>
   </url>
 </urlset>

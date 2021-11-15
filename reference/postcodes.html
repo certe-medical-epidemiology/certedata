@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get a situation report on the certedata — certedata_sitrep • certedata</title>
+<title>Data Set with Dutch Zipcodes, Cities, Municipalities and Province — postcodes • certedata</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,11 +46,8 @@
 
 
 
-<meta property="og:title" content="Get a situation report on the certedata — certedata_sitrep" />
-<meta property="og:description" content="This function gives a quick overview of the versions of R and RStudio as
-well as all certedata packages. It's primarily designed to help you get
-a quick idea of what's going on when you're helping someone else debug
-a problem." />
+<meta property="og:title" content="Data Set with Dutch Zipcodes, Cities, Municipalities and Province — postcodes" />
+<meta property="og:description" content="Data Set with Dutch Zipcodes, Cities, Municipalities and Province" />
 <meta property="og:image" content="https://certe-medical-epidemiology.github.io/certedata/logo.svg" />
 
 
@@ -139,21 +136,39 @@ a problem." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get a situation report on the certedata</h1>
-    <small class="dont-index">Source: <a href='https://github.com/certe-medical-epidemiology/certedata/blob/master/R/update.R'><code>R/update.R</code></a></small>
-    <div class="hidden name"><code>certedata_sitrep.Rd</code></div>
+    <h1>Data Set with Dutch Zipcodes, Cities, Municipalities and Province</h1>
+    <small class="dont-index">Source: <a href='https://github.com/certe-medical-epidemiology/certedata/blob/master/R/data.R'><code>R/data.R</code></a></small>
+    <div class="hidden name"><code>postcodes.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function gives a quick overview of the versions of R and RStudio as
-well as all certedata packages. It's primarily designed to help you get
-a quick idea of what's going on when you're helping someone else debug
-a problem.</p>
+    <p>Data Set with Dutch Zipcodes, Cities, Municipalities and Province</p>
     </div>
 
-    <pre class="usage"><span class='fu'>certedata_sitrep</span><span class='op'>(</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='va'>postcodes</span></pre>
 
 
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+
+    <p>A <a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a> with 4,961 observations and 13 variables:</p><ul>
+<li><p><code>postcode</code><br /> zipcode, contains PC2, PC3 and PC4</p></li>
+<li><p><code>inwoners</code><br /> total number of inhabitants</p></li>
+<li><p><code>inwoners_man</code><br /> total number of male inhabitants</p></li>
+<li><p><code>inwoners_vrouw</code><br /> total number of female inhabitants</p></li>
+<li><p><code>plaats</code><br /> formal Dutch city name</p></li>
+<li><p><code>gemeente</code><br /> formal Dutch municipality name</p></li>
+<li><p><code>provincie</code><br /> formal Dutch province name</p></li>
+<li><p><code>nuts3</code><br /> Nomenclature of Territorial Units for Statistics, level 3 (in Dutch: COROP region, <em>Coordinatie Commissie Regionaal OnderzoeksProgramma</em>)</p></li>
+<li><p><code>ggdregio</code><br /> name of the regional GGD service (public healthcare service)</p></li>
+<li><p><code>jeugdregio</code><br /> name of the regional youth service</p></li>
+<li><p><code>veiligheidsregio</code><br /> name of the regional safety service (public healthcare service)</p></li>
+<li><p><code>huishoudens</code><br /> number of households in the zipcode area</p></li>
+<li><p><code>huishouden_grootte</code><br /> mean size of the household sizes in the zipcode area</p></li>
+</ul>
+
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>See <a href='https://github.com/certe-medical-epidemiology/certedata/blob/main/data-raw/update_gis.R'>the repository file</a> to update this data set.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
