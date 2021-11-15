@@ -5,3 +5,4 @@
 ^certedata\.Rproj$
 ^_pkgdown\.yml$
 ^logo\.svg$
+^data-raw$
