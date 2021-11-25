@@ -1,5 +1,5 @@
 Package: certedata
-Title: A Certe R Package for Loading Certe Universe
+Title: A Certe R Package for Loading 'certedata' Universe
 Version: 4.0.4
 Authors@R: c(
   person(given = c("Matthijs", "S."), 
@@ -11,8 +11,8 @@ Authors@R: c(
          role = c("aut")),
   person(given = "Certe Medical Diagnostics & Advice Foundation",
          role = c("cph", "fnd")))
-Description: A Certe R Package for loading all R packages in the Certe
-  Medical Epidemiology universe, based on the 'tidyverse/tidyverse' repo.
+Description: A Certe R Package for loading all R packages in the
+  'certedata' universe, based on the 'tidyverse/tidyverse' repo.
   This package also contains public data about Dutch geometries.
   This package is part of the 'certedata' universe.
 URL: https://certe-medical-epidemiology.github.io/certedata, https://github.com/certe-medical-epidemiology/certedata
