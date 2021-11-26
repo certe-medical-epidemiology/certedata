@@ -20,9 +20,10 @@
 core <- c(sort(c("ggplot2", "tibble", "tidyr", "readr", "readxl",
                  "purrr", "dplyr", "stringr", "lubridate",
                  "xml2", "rvest", "dtplyr",
-                 "cleaner", "AMR", "extrafont", "magrittr", "ggtext", "skimr")),
+                 "cleaner", "AMR", "extrafont", "magrittr", "skimr")),
           "flextable" ,
-          "certestyle", "certetoolbox", "certemail", "certeplot2", "certeprojects", "certedb")
+          # 'certedata' universe packages:
+          "certestyle", "certetoolbox", "certemail", "certeplot2", "certeprojects", "certedb", "certestats")
 base_pkgs <- rownames(installed.packages()[which(installed.packages()[, "Priority"] == "base"), ])
 
 core_unloaded <- function() {
