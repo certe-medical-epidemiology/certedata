@@ -46,7 +46,7 @@
 "inwoners_per_postcode_leeftijd"
 
 #' Data Sets with Geometries of Dutch Provinces, Municipalities and Zipcodes
-#' @format A [sf]/[data.frame] with 3 variables:
+#' @format A `sf`/[data.frame] with 3 variables:
 #' - `...`\cr column name of the identifier, which is the singular form of the name of the data set (i.e., `gemeenten$gemeente`)
 #' - `area_km2`\cr area in square kilometres
 #' - `geometry`\cr the polygonal form of the area

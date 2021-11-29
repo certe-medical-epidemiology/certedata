@@ -2,13 +2,13 @@
 % Please edit documentation in R/conflicts.R
 \name{certedata_conflicts}
 \alias{certedata_conflicts}
-\title{Conflicts between the certedata and other packages}
+\title{Conflicts between the 'certedata' universe and other packages}
 \usage{
 certedata_conflicts()
 }
 \description{
-This function lists all the conflicts between packages in the certedata
-and other packages that you have loaded.
+This function lists all the conflicts between packages in the 'certedata'
+universe and other packages that you have loaded.
 }
 \examples{
 certedata_conflicts()

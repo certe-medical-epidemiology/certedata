@@ -21,9 +21,11 @@ core <- c(sort(c("ggplot2", "tibble", "tidyr", "readr", "readxl",
                  "purrr", "dplyr", "stringr", "lubridate",
                  "xml2", "rvest", "dtplyr",
                  "cleaner", "AMR", "extrafont", "magrittr", "skimr")),
-          "flextable" ,
+          "flextable", "certetools",
           # 'certedata' universe packages:
           "certestyle", "certetoolbox", "certemail", "certeplot2", "certeprojects", "certedb", "certestats")
+installed <- core %in% rownames(utils::installed.packages())
+core <- core[which(installed)]
 base_pkgs <- rownames(installed.packages()[which(installed.packages()[, "Priority"] == "base"), ])
 
 core_unloaded <- function() {

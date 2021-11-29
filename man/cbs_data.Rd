@@ -12,7 +12,7 @@
 \alias{veiligheidsregios}
 \title{Data Sets with Geometries of Dutch Provinces, Municipalities and Zipcodes}
 \format{
-A \link{sf}/\link{data.frame} with 3 variables:
+A \code{sf}/\link{data.frame} with 3 variables:
 \itemize{
 \item \code{...}\cr column name of the identifier, which is the singular form of the name of the data set (i.e., \code{gemeenten$gemeente})
 \item \code{area_km2}\cr area in square kilometres

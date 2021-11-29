@@ -17,9 +17,9 @@
 #  useful, but it comes WITHOUT ANY WARRANTY OR LIABILITY.              #
 # ===================================================================== #
 
-#' Update certedata packages
+#' Update 'certedata' packages
 #'
-#' This will check to see if all certedata packages (and optionally, their
+#' This will check to see if all 'certedata' packages (and optionally, their
 #' dependencies) are up-to-date, and will install after an interactive
 #' confirmation.
 #'

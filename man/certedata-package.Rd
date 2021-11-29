@@ -4,10 +4,11 @@
 \name{certedata-package}
 \alias{certedata}
 \alias{certedata-package}
-\title{certedata: A Certe R Package for Loading Certe Universe}
+\title{certedata: A Certe R Package for Loading 'certedata' Universe}
 \description{
-A Certe R Package for loading all R packages in the Certe
-  Medical Epidemiology universe, based on the tidyverse/tidyverse repo.
+A Certe R Package for loading all R packages in the
+  'certedata' universe, based on the 'tidyverse/tidyverse' repo.
+  This package also contains public data about Dutch geometries.
   This package is part of the 'certedata' universe.
 }
 \seealso{

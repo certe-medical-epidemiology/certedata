@@ -17,10 +17,10 @@
 #  useful, but it comes WITHOUT ANY WARRANTY OR LIABILITY.              #
 # ===================================================================== #
 
-#' Conflicts between the certedata and other packages
+#' Conflicts between the 'certedata' universe and other packages
 #'
-#' This function lists all the conflicts between packages in the certedata
-#' and other packages that you have loaded.
+#' This function lists all the conflicts between packages in the 'certedata'
+#' universe and other packages that you have loaded.
 #'
 #' @export
 #' @examples

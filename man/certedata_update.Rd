@@ -2,7 +2,7 @@
 % Please edit documentation in R/update.R
 \name{certedata_update}
 \alias{certedata_update}
-\title{Update certedata packages}
+\title{Update 'certedata' packages}
 \usage{
 certedata_update(recursive = FALSE, repos = getOption("repos"))
 }
@@ -14,7 +14,7 @@ certedata packages.}
 Defaults to \code{getOptions("repos")}.}
 }
 \description{
-This will check to see if all certedata packages (and optionally, their
+This will check to see if all 'certedata' packages (and optionally, their
 dependencies) are up-to-date, and will install after an interactive
 confirmation.
 }
