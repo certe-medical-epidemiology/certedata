@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Conflicts between the certedata and other packages — certedata_conflicts • certedata</title>
+<title>Conflicts between the 'certedata' universe and other packages — certedata_conflicts • certedata</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -48,9 +48,9 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Conflicts between the certedata and other packages — certedata_conflicts" />
-<meta property="og:description" content="This function lists all the conflicts between packages in the certedata
-and other packages that you have loaded." />
+<meta property="og:title" content="Conflicts between the 'certedata' universe and other packages — certedata_conflicts" />
+<meta property="og:description" content="This function lists all the conflicts between packages in the 'certedata'
+universe and other packages that you have loaded." />
 <meta property="og:image" content="https://certe-medical-epidemiology.github.io/certedata/logo.svg" />
 
 
@@ -83,7 +83,7 @@ and other packages that you have loaded." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">certedata</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.0.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.1.0</span>
       </span>
     </div>
 
@@ -139,14 +139,14 @@ and other packages that you have loaded." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Conflicts between the certedata and other packages</h1>
+    <h1>Conflicts between the 'certedata' universe and other packages</h1>
     <small class="dont-index">Source: <a href='https://github.com/certe-medical-epidemiology/certedata/blob/master/R/conflicts.R'><code>R/conflicts.R</code></a></small>
     <div class="hidden name"><code>certedata_conflicts.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function lists all the conflicts between packages in the certedata
-and other packages that you have loaded.</p>
+    <p>This function lists all the conflicts between packages in the 'certedata'
+universe and other packages that you have loaded.</p>
     </div>
 
     <pre class="usage"><span class='fu'>certedata_conflicts</span><span class='op'>(</span><span class='op'>)</span></pre>
@@ -156,6 +156,22 @@ and other packages that you have loaded.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='r-in'><span class='fu'>certedata_conflicts</span><span class='op'>(</span><span class='op'>)</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> ── <span style='font-weight: bold;'>Conflicts</span> ────────────────────────────────────────── certedata_conflicts() ──</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #0000BB;'>•</span> <span style='color: #0000BB;'>certestats</span>::<span style='color: #00BB00;'>all()</span>            <span style='font-style: italic;'> masks </span><span style='color: #0000BB;'>base</span>::<span style='color: #555555;'>all()</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #0000BB;'>•</span> <span style='color: #0000BB;'>certestats</span>::<span style='color: #00BB00;'>any()</span>            <span style='font-style: italic;'> masks </span><span style='color: #0000BB;'>base</span>::<span style='color: #555555;'>any()</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #0000BB;'>•</span> <span style='color: #0000BB;'>certestats</span>::<span style='color: #00BB00;'>fivenum()</span>        <span style='font-style: italic;'> masks </span><span style='color: #0000BB;'>stats</span>::<span style='color: #555555;'>fivenum()</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #0000BB;'>•</span> <span style='color: #0000BB;'>certestats</span>::<span style='color: #00BB00;'>IQR()</span>            <span style='font-style: italic;'> masks </span><span style='color: #0000BB;'>stats</span>::<span style='color: #555555;'>IQR()</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #0000BB;'>•</span> <span style='color: #0000BB;'>certestats</span>::<span style='color: #00BB00;'>max()</span>            <span style='font-style: italic;'> masks </span><span style='color: #0000BB;'>base</span>::<span style='color: #555555;'>max()</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #0000BB;'>•</span> <span style='color: #0000BB;'>certestats</span>::<span style='color: #00BB00;'>mean()</span>           <span style='font-style: italic;'> masks </span><span style='color: #0000BB;'>base</span>::<span style='color: #555555;'>mean()</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #0000BB;'>•</span> <span style='color: #0000BB;'>certestats</span>::<span style='color: #00BB00;'>median()</span>         <span style='font-style: italic;'> masks </span><span style='color: #0000BB;'>stats</span>::<span style='color: #555555;'>median()</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #0000BB;'>•</span> <span style='color: #0000BB;'>certestats</span>::<span style='color: #00BB00;'>min()</span>            <span style='font-style: italic;'> masks </span><span style='color: #0000BB;'>base</span>::<span style='color: #555555;'>min()</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #0000BB;'>•</span> <span style='color: #0000BB;'>certestats</span>::<span style='color: #00BB00;'>pmax()</span>           <span style='font-style: italic;'> masks </span><span style='color: #0000BB;'>base</span>::<span style='color: #555555;'>pmax()</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #0000BB;'>•</span> <span style='color: #0000BB;'>certestats</span>::<span style='color: #00BB00;'>pmin()</span>           <span style='font-style: italic;'> masks </span><span style='color: #0000BB;'>base</span>::<span style='color: #555555;'>pmin()</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #0000BB;'>•</span> <span style='color: #0000BB;'>certestats</span>::<span style='color: #00BB00;'>prod()</span>           <span style='font-style: italic;'> masks </span><span style='color: #0000BB;'>base</span>::<span style='color: #555555;'>prod()</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #0000BB;'>•</span> <span style='color: #0000BB;'>certestats</span>::<span style='color: #00BB00;'>quantile()</span>       <span style='font-style: italic;'> masks </span><span style='color: #0000BB;'>stats</span>::<span style='color: #555555;'>quantile()</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #0000BB;'>•</span> <span style='color: #0000BB;'>certestats</span>::<span style='color: #00BB00;'>range()</span>          <span style='font-style: italic;'> masks </span><span style='color: #0000BB;'>base</span>::<span style='color: #555555;'>range()</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #0000BB;'>•</span> <span style='color: #0000BB;'>certestats</span>::<span style='color: #00BB00;'>sd()</span>             <span style='font-style: italic;'> masks </span><span style='color: #0000BB;'>stats</span>::<span style='color: #555555;'>sd()</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #0000BB;'>•</span> <span style='color: #0000BB;'>certestats</span>::<span style='color: #00BB00;'>sum()</span>            <span style='font-style: italic;'> masks </span><span style='color: #0000BB;'>base</span>::<span style='color: #555555;'>sum()</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #0000BB;'>•</span> <span style='color: #0000BB;'>certestats</span>::<span style='color: #00BB00;'>var()</span>            <span style='font-style: italic;'> masks </span><span style='color: #0000BB;'>stats</span>::<span style='color: #555555;'>var()</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #0000BB;'>•</span> <span style='color: #0000BB;'>certetoolbox</span>::<span style='color: #00BB00;'>%like_case%()</span>  <span style='font-style: italic;'> masks </span><span style='color: #BB0000;'>AMR</span>::<span style='color: #555555;'>%like_case%()</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #0000BB;'>•</span> <span style='color: #0000BB;'>certetoolbox</span>::<span style='color: #00BB00;'>%like%()</span>       <span style='font-style: italic;'> masks </span><span style='color: #BB0000;'>AMR</span>::<span style='color: #555555;'>%like%()</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #0000BB;'>•</span> <span style='color: #0000BB;'>certetoolbox</span>::<span style='color: #00BB00;'>%unlike_case%()</span><span style='font-style: italic;'> masks </span><span style='color: #BB0000;'>AMR</span>::<span style='color: #555555;'>%unlike_case%()</span></span>
