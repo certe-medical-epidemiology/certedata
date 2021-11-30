@@ -17,15 +17,41 @@
 #  useful, but it comes WITHOUT ANY WARRANTY OR LIABILITY.              #
 # ===================================================================== #
 
-core <- c(sort(c("ggplot2", "tibble", "tidyr", "readr", "readxl",
-                 "purrr", "dplyr", "stringr", "lubridate",
-                 "xml2", "rvest", "dtplyr",
-                 "cleaner", "AMR", "extrafont", "magrittr", "skimr")),
-          "flextable", "certetools",
-          # 'certedata' universe packages:
-          "certestyle", "certetoolbox", "certemail", "certeplot2", "certeprojects", "certedb", "certestats")
+core <- c(
+  # these are loaded in alphabetical order
+  "AMR",
+  "cleaner",
+  "dplyr",
+  "extrafont",
+  "ggplot2",
+  "lubridate",
+  "purrr",
+  "skimr",
+  "stringr",
+  "tibble",
+  "tidyr",
+  
+  # then these are loaded afterwards, to prevent function conflicts
+  "flextable", # after purrr, as flextable::compose() conflicts with purrr::compose()
+  "certetools", # old Certe pkg, to remove in later stage
+  
+  # then the 'certedata' universe packages are loaded, as their functions should overwrite any other functions:
+  "certedb",
+  "certemail",
+  "certeplot2",
+  "certeprojects",
+  "certestats",
+  "certestyle",
+  "certetoolbox")
 installed <- core %in% rownames(utils::installed.packages())
+if (length(which(!installed)) > 0) {
+  warning(ifelse(length(which(!installed)) == 1, "This package is", "These packages are"),
+          " not installed, but would be loaded as part of the 'certedata' universe:\n",
+          paste0("'", core[which(!installed)], "'", collapse = ", "),
+          call. = FALSE)
+}
 core <- core[which(installed)]
+
 base_pkgs <- rownames(installed.packages()[which(installed.packages()[, "Priority"] == "base"), ])
 
 core_unloaded <- function() {
