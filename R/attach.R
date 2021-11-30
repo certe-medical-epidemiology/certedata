@@ -17,7 +17,7 @@
 #  useful, but it comes WITHOUT ANY WARRANTY OR LIABILITY.              #
 # ===================================================================== #
 
-core <- c(
+core_all <- c(
   # these are loaded in alphabetical order
   "AMR",
   "cleaner",
@@ -43,20 +43,15 @@ core <- c(
   "certestats",
   "certestyle",
   "certetoolbox")
-installed <- core %in% rownames(utils::installed.packages())
-if (length(which(!installed)) > 0) {
-  warning(ifelse(length(which(!installed)) == 1, "This package is", "These packages are"),
-          " not installed, but would be loaded as part of the 'certedata' universe:\n",
-          paste0("'", core[which(!installed)], "'", collapse = ", "),
-          call. = FALSE)
-}
-core <- core[which(installed)]
+installed <- core_all %in% rownames(utils::installed.packages())
+core_available <- core_all[which(installed)]
+core_unavailable <- core_all[which(!installed)]
 
 base_pkgs <- rownames(installed.packages()[which(installed.packages()[, "Priority"] == "base"), ])
 
 core_unloaded <- function() {
-  search <- paste0("package:", core)
-  core[!search %in% search()]
+  search <- paste0("package:", core_available)
+  core_available[!search %in% search()]
 }
 
 # Attach the package from the same package library it was
@@ -83,11 +78,18 @@ certedata_attach <- function() {
   )
 
   versions <- vapply(to_load, package_version, character(1))
-  packages <- paste0(
-    crayon::green(cli::symbol$tick), " ", crayon::blue(format(to_load)), " ",
-    crayon::col_align(versions, max(crayon::col_nchar(versions)))
-  )
-
+  formatted <- format(c(to_load, core_unavailable))
+  packages <- paste(crayon::green(cli::symbol$tick), crayon::blue(formatted[seq_len(length(to_load))]))
+  if (length(core_unavailable) > 0) {
+    versions <- c(versions, rep(crayon::red("?.?.?"), length(core_unavailable)))
+    packages <- c(packages,
+                  paste(crayon::red(cli::symbol$cross), crayon::red(formatted[seq(length(to_load) + 1, length(formatted))])))
+  }
+  packages <- paste0(packages, " ", crayon::col_align(versions, max(crayon::col_nchar(versions))))
+  # sort on original order
+  ord <- order(core_all)
+  packages <- packages[ord]
+  
   if (length(packages) %% 2 == 1) {
     packages <- append(packages, "")
   }
@@ -107,7 +109,7 @@ package_version <- function(x) {
   version <- as.character(unclass(utils::packageVersion(x))[[1]])
 
   if (length(version) > 3) {
-    version[4:length(version)] <- crayon::red(as.character(version[4:length(version)]))
+    version[4:length(version)] <- crayon::silver(as.character(version[4:length(version)]))
   }
   paste0(version, collapse = ".")
 }

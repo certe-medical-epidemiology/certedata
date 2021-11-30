@@ -38,7 +38,7 @@ certedata_conflicts <- function() {
   conflict_funs <- purrr::imap(conflicts, confirm_conflict)
   conflict_funs <- purrr::compact(conflict_funs)
   
-  # sorteren op package naam, niet op functie
+  # sort on package name, not on function name
   conflict_funs <- conflict_funs[names(sort(sapply(conflict_funs, function(x) x[[1]])))]
 
   structure(conflict_funs, class = "certedata_conflicts")

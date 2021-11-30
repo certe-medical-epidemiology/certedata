@@ -76,9 +76,13 @@ certedata_sitrep <- function() {
   )
 
   cli::cat_rule("Core packages")
-  cli::cat_bullet(packages[deps$package %in% core])
+  cli::cat_bullet(packages[deps$package %in% core_available])
   cli::cat_rule("Non-core packages")
-  cli::cat_bullet(packages[!deps$package %in% core])
+  cli::cat_bullet(packages[!deps$package %in% core_available])
+  if (length(core_unavailable) > 0) {
+    cli::cat_rule("Unavailable packages")
+    cli::cat_bullet(crayon::red(core_unavailable))
+  }
 }
 
 #' List all certedata dependencies
@@ -90,7 +94,7 @@ certedata_sitrep <- function() {
 #' @export
 certedata_deps <- function(recursive = FALSE, repos = getOption("repos")) {
   pkgs <- utils::available.packages(repos = repos)
-  deps <- tools::package_dependencies(core, pkgs, recursive = recursive)
+  deps <- tools::package_dependencies(core_available, pkgs, recursive = recursive)
 
   pkg_deps <- unique(sort(unlist(deps)))
 
