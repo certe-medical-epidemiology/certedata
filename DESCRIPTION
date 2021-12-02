@@ -1,6 +1,6 @@
 Package: certedata
 Title: A Certe R Package for Loading 'certedata' Universe
-Version: 4.1.1
+Version: 4.1.2
 Authors@R: c(
   person(given = c("Matthijs", "S."), 
          family = "Berends",
@@ -13,21 +13,21 @@ Authors@R: c(
          role = c("cph", "fnd")))
 Description: A Certe R Package for loading all R packages in the
   'certedata' universe, based on the 'tidyverse/tidyverse' repo.
-  This package also contains public data about Dutch geometries.
   This package is part of the 'certedata' universe.
 URL: https://certe-medical-epidemiology.github.io/certedata, https://github.com/certe-medical-epidemiology/certedata
 Depends: 
   R (>= 3.6.0)
 Imports:
+  magrittr (>= 2.0.0)
+Suggests:
   certedb,
+  certegis,
   certemail,
   certeplot2,
   certeprojects,
   certestyle,
   certestats,
   certetoolbox,
-  magrittr (>= 2.0.0)
-Suggests:
   AMR,
   cleaner,
   dplyr,
@@ -50,12 +50,4 @@ LazyData: true
 LazyDataCompression: bzip2
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
-Remotes:
-  certe-medical-epidemiology/certedb,
-  certe-medical-epidemiology/certemail,
-  certe-medical-epidemiology/certeplot2,
-  certe-medical-epidemiology/certeprojects,
-  certe-medical-epidemiology/certestyle,
-  certe-medical-epidemiology/certestats,
-  certe-medical-epidemiology/certetoolbox
 Config/testthat/edition: 2
