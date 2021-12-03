@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://certe-medical-epidemiology.github.io/certedata/index.html</loc>
+    <loc>https://certe-medical-epidemiology.github.io/certedata/404.html</loc>
   </url>
   <url>
-    <loc>https://certe-medical-epidemiology.github.io/certedata/reference/cbs_data.html</loc>
+    <loc>https://certe-medical-epidemiology.github.io/certedata/LICENSE.html</loc>
+  </url>
+  <url>
+    <loc>https://certe-medical-epidemiology.github.io/certedata/authors.html</loc>
+  </url>
+  <url>
+    <loc>https://certe-medical-epidemiology.github.io/certedata/index.html</loc>
   </url>
   <url>
     <loc>https://certe-medical-epidemiology.github.io/certedata/reference/certedata-package.html</loc>
@@ -25,12 +31,9 @@
     <loc>https://certe-medical-epidemiology.github.io/certedata/reference/certedata_update.html</loc>
   </url>
   <url>
-    <loc>https://certe-medical-epidemiology.github.io/certedata/reference/inwoners_per_postcode_leeftijd.html</loc>
+    <loc>https://certe-medical-epidemiology.github.io/certedata/reference/index.html</loc>
   </url>
   <url>
     <loc>https://certe-medical-epidemiology.github.io/certedata/reference/postcodes.html</loc>
-  </url>
-  <url>
-    <loc>https://certe-medical-epidemiology.github.io/certedata/reference/postcodes4_afstanden.html</loc>
   </url>
 </urlset>
