@@ -39,8 +39,10 @@ certedata_conflicts <- function() {
   conflict_funs <- purrr::compact(conflict_funs)
   
   # sort on package name, not on function name
-  conflict_funs <- conflict_funs[names(sort(sapply(conflict_funs, function(x) x[[1]])))]
-
+  tryCatch(
+    conflict_funs <- conflict_funs[names(sort(vapply(FUN.VALUE = character(1), conflict_funs, function(x) x[[1]])))],
+    error = function(e ) conflict_funs)
+  
   structure(conflict_funs, class = "certedata_conflicts")
 }
 

@@ -38,6 +38,6 @@
                                 " not installed, but should be loaded as part of the 'certedata' universe")),
           startup = TRUE)
     }
-  }, error = function(e) message(e$message))
+  }, error = function(e) packageStartupMessage(e$message))
   
 }
