@@ -106,7 +106,7 @@ certedata_attach <- function() {
     lapply(to_load, same_library)
   )
 
-  invisible()
+  invisible(TRUE)
 }
 
 package_version <- function(x) {

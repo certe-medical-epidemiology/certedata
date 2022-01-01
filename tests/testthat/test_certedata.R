@@ -18,6 +18,6 @@
 # ===================================================================== #
 
 test_that("certedata works", {
-  expect_output(print(certedata_conflicts()))
-  expect_length(certedata_packages(include_self = FALSE), 22)
+  expect_length(core_all, 22)
+  expect_true(certedata_attach())
 })
