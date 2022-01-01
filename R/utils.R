@@ -49,17 +49,10 @@ text_col <- function(x) {
 #' @examples
 #' certedata_packages()
 certedata_packages <- function(include_self = TRUE) {
-  # raw <- utils::packageDescription("certedata")$Imports
-  # imports <- strsplit(raw, ",")[[1]]
-  # parsed <- gsub("^\\s+|\\s+$", "", imports)
-  # names <- vapply(strsplit(parsed, "\\s+"), "[[", 1, FUN.VALUE = character(1))
-  
   names <- core_available
-
   if (include_self) {
     names <- c(names, "certedata")
   }
-
   names
 }
 
@@ -69,10 +62,13 @@ invert <- function(x) {
   tapply(as.character(stacked$ind), stacked$values, list)
 }
 
-
 style_grey <- function(level, ...) {
   crayon::style(
     paste0(...),
     crayon::make_style(grDevices::grey(level), grey = TRUE)
   )
+}
+
+is_attached <- function(x) {
+  paste0("package:", x) %in% search()
 }
