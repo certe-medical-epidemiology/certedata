@@ -17,7 +17,11 @@
 #  useful, but it comes WITHOUT ANY WARRANTY OR LIABILITY.              #
 # ===================================================================== #
 
-test_that("function_name works", {
-  expect_true(1 + 1 == 2)
-  expect_identical(1, 2 - 1)
+test_that("certedata works", {
+  expect_output(print(certedata_conflicts()))
+  expect_length(certedata_packages(include_self = FALSE), 22)
+  repo_old <- options()$repos
+  options(repos = "https://cran.rstudio.com")
+  expect_output(certedata_sitrep())
+  options(repos = repo_old)
 })

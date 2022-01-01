@@ -19,17 +19,20 @@
 
 core_all <- c(
   # these are loaded in alphabetical order
-  "AMR",
-  "cleaner",
-  "dplyr",
-  "extrafont",
-  "ggplot2",
-  "lubridate",
-  "purrr",
-  "skimr",
-  "stringr",
-  "tibble",
-  "tidyr",
+  sort(c("AMR",
+         "cleaner",
+         "extrafont",
+         "skimr",
+         
+         # tidyverse:
+         "broom",
+         "dplyr",
+         "ggplot2",
+         "lubridate",
+         "purrr",
+         "stringr",
+         "tibble",
+         "tidyr")),
   
   # then these are loaded afterwards, to prevent function conflicts
   "flextable", # after purrr, as flextable::compose() conflicts with purrr::compose()

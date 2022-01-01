@@ -1,6 +1,6 @@
 Package: certedata
 Title: A Certe R Package for Loading 'certedata' Universe
-Version: 4.1.2
+Version: 4.1.3
 Authors@R: c(
   person(given = c("Matthijs", "S."), 
          family = "Berends",
@@ -18,7 +18,10 @@ URL: https://certe-medical-epidemiology.github.io/certedata, https://github.com/
 Depends: 
   R (>= 3.6.0)
 Imports:
-  magrittr (>= 2.0.0)
+  magrittr (>= 2.0.0),
+  cli (>= 3.0.0),
+  crayon (>= 1.4.0),
+  rstudioapi (>= 0.10)
 Suggests:
   certedb,
   certegis,
@@ -30,19 +33,11 @@ Suggests:
   certetoolbox,
   AMR,
   cleaner,
-  dplyr,
   extrafont,
   flextable,
-  ggplot2,
   lubridate,
-  purrr,
   skimr,
-  stringr,
-  tibble,
-  tidyr,
-  cli (>= 3.0.0),
-  crayon (>= 1.4.0),
-  rstudioapi (>= 0.10),
+  tidyverse,
   testthat (>= 2.0.0)
 License: GPL-2
 Encoding: UTF-8
