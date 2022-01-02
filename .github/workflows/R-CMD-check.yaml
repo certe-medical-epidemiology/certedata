@@ -41,10 +41,10 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: macOS-latest,   r: 'devel',   allowfail: true}
+#          - {os: macOS-latest,   r: 'devel',   allowfail: true}
           - {os: macOS-latest,   r: '4.1',     allowfail: false}
           - {os: macOS-latest,   r: '4.0',     allowfail: false}
-          - {os: macOS-latest,   r: '3.6',     allowfail: false}
+#          - {os: macOS-latest,   r: '3.6',     allowfail: false}
           - {os: ubuntu-20.04,   r: 'devel',   allowfail: true, http-user-agent: 'release'}
           - {os: ubuntu-20.04,   r: '4.1',     allowfail: false}
           - {os: ubuntu-20.04,   r: '4.0',     allowfail: false}
