@@ -32,13 +32,14 @@
     x <- certedata_conflicts()
     msg(certedata_conflict_message(x), startup = TRUE)
   }
-
+  
   if (length(get_core_unavailable()) > 0) {
     msg(italic(paste0(ifelse(length(get_core_unavailable()) == 1,
                              "One package is",
                              "Some packages are"),
-                      " not installed, but should be available as part of the 'certedata' universe")),
+                      " not installed, but should be available as part of the 'certedata' universe.",
+                      " Run certedata_install_packages().")),
         startup = TRUE)
   }
-
+  
 }

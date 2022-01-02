@@ -44,18 +44,50 @@ text_col <- function(x) {
 
 }
 
-#' List all packages in the certedata
-#'
-#' @param include_self Include certedata in the list?
+#' List all packages in the 'certedata' universe
+#' @param only_installed a [logical] to indicate whether only currently installed packages should be returned
+#' @param include_self a [logical] to indicate whether the 'certedata' package should be included as well
 #' @export
 #' @examples
 #' certedata_packages()
-certedata_packages <- function(include_self = TRUE) {
-  names <- get_core_available()
-  if (include_self) {
-    names <- c(names, "certedata")
+certedata_packages <- function(only_installed = TRUE, include_self = TRUE) {
+  if (isTRUE(only_installed)) {
+    pkgs <- get_core_available()
+  } else {
+    pkgs <- core_all
   }
-  names
+  pkgs <- pkgs[grepl("^certe", pkgs)]
+  if (isTRUE(include_self)) {
+    pkgs <- c(pkgs, "certedata")
+  }
+  pkgs
+}
+
+#' Install all packages required for the 'certedata' universe
+#' 
+#' This function not only installs the 'certedata' universe, but also its accompanying third-party packages.
+#' @details These packages will be installed if not already:
+#' 
+#' `r paste0(vapply(FUN.VALUE = character(1), sort(core_all), function(pkg) paste0("  * ``", pkg, "``")), collapse = "\n")`
+#' @export
+certedata_install_packages <- function() {
+  pkgs <- get_core_unavailable()
+  if (length(pkgs) == 0) {
+    message("All required packages are already installed.")
+    return(invisible())
+  }
+  if (!interactive()) {
+    message("These packages require installation, but this can only be done in interactive mode: ",
+            paste0(pkgs, collapse = ", "), ".")
+    return(invisible())
+  }
+  if (isTRUE(utils::askYesNo("This will install the following packages: ", paste0(pkgs, collapse = ", ")))) {
+    for (pkg in pkgs) {
+      tryCatch(utils::install.packages(pkg, repos = unique(c(options()$repos, "https://certe-medical-epidemiology.r-universe.dev"))),
+               error = function(e) invisible())
+    }
+  }
+  return(invisible())
 }
 
 invert <- function(x) {

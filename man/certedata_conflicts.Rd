@@ -7,8 +7,7 @@
 certedata_conflicts()
 }
 \description{
-This function lists all the conflicts between packages in the 'certedata'
-universe and other packages that you have loaded.
+This function lists all the conflicts between packages in the 'certedata' universe and other packages that you have loaded.
 }
 \examples{
 certedata_conflicts()

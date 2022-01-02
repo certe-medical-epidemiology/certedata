@@ -18,7 +18,8 @@
 # ===================================================================== #
 
 test_that("certedata works", {
-  expect_gte(length(certedata_packages()), 14) # 14 non-certedata packages
+  expect_gte(length(get_core_available()), 14) # at least 14 non-certedata packages
   expect_true(certedata_attach())
   expect_output(print(certedata_conflicts()))
+  expect_message(certedata_install_packages())
 })

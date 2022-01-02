@@ -19,9 +19,7 @@
 
 #' Conflicts between the 'certedata' universe and other packages
 #'
-#' This function lists all the conflicts between packages in the 'certedata'
-#' universe and other packages that you have loaded.
-#'
+#' This function lists all the conflicts between packages in the 'certedata' universe and other packages that you have loaded.
 #' @export
 #' @importFrom purrr set_names keep imap compact
 #' @examples
@@ -33,7 +31,7 @@ certedata_conflicts <- function() {
   
   conflicts <- keep(objs, ~ length(.x) > 1)
   
-  tidy_names <- paste0("package:", certedata_packages())
+  tidy_names <- paste0("package:", get_core_available())
   conflicts <- keep(conflicts, ~ any(.x %in% tidy_names))
   
   conflict_funs <- imap(conflicts, confirm_conflict)

@@ -2,10 +2,12 @@
 
 This is a Certe R Package for loading all R packages in the 'certedata' universe. This package is part of the 'certedata' universe.
 
-You can [read the manual with explanation about all functions](https://certe-medical-epidemiology.github.io/certedata/reference), or install this particular R package using:
+You can [read the manual with explanation about all functions](https://certe-medical-epidemiology.github.io/certedata/reference), or install the complete 'certedata' universe and all its accompanying third-party packages using:
 
 ```r
-install.packages("certedata", repos = "https://certe-medical-epidemiology.r-universe.dev")
+install.packages("certedata",
+                 repos = "https://certe-medical-epidemiology.r-universe.dev",
+                 dependencies = TRUE).
 ```
 
 ## About the 'certedata' universe

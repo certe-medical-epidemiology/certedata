@@ -2,15 +2,17 @@
 % Please edit documentation in R/utils.R
 \name{certedata_packages}
 \alias{certedata_packages}
-\title{List all packages in the certedata}
+\title{List all packages in the 'certedata' universe}
 \usage{
-certedata_packages(include_self = TRUE)
+certedata_packages(only_installed = TRUE, include_self = TRUE)
 }
 \arguments{
-\item{include_self}{Include certedata in the list?}
+\item{only_installed}{a \link{logical} to indicate whether only currently installed packages should be returned}
+
+\item{include_self}{a \link{logical} to indicate whether the 'certedata' package should be included as well}
 }
 \description{
-List all packages in the certedata
+List all packages in the 'certedata' universe
 }
 \examples{
 certedata_packages()
