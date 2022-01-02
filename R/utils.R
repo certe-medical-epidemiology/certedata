@@ -27,18 +27,20 @@ msg <- function(..., startup = FALSE) {
   }
 }
 
+#' @importFrom rstudioapi isAvailable hasFun getThemeInfo
+#' @importFrom crayon white black
 text_col <- function(x) {
   # If RStudio not available, messages already printed in black
-  if (!rstudioapi::isAvailable()) {
+  if (!isAvailable()) {
     return(x)
   }
 
-  if (!rstudioapi::hasFun("getThemeInfo")) {
+  if (!hasFun("getThemeInfo")) {
     return(x)
   }
 
-  theme <- rstudioapi::getThemeInfo()
-  if (isTRUE(theme$dark)) crayon::white(x) else crayon::black(x)
+  theme <- getThemeInfo()
+  if (isTRUE(theme$dark)) white(x) else black(x)
 
 }
 
@@ -49,7 +51,7 @@ text_col <- function(x) {
 #' @examples
 #' certedata_packages()
 certedata_packages <- function(include_self = TRUE) {
-  names <- core_available
+  names <- get_core_available()
   if (include_self) {
     names <- c(names, "certedata")
   }
@@ -62,13 +64,22 @@ invert <- function(x) {
   tapply(as.character(stacked$ind), stacked$values, list)
 }
 
+#' @importFrom crayon style make_style
 style_grey <- function(level, ...) {
-  crayon::style(
+  style(
     paste0(...),
-    crayon::make_style(grDevices::grey(level), grey = TRUE)
+    make_style(grDevices::grey(level), grey = TRUE)
   )
 }
 
 is_attached <- function(x) {
   paste0("package:", x) %in% search()
+}
+
+packageVersion <- function(pkg) {
+  if (all(vapply(FUN.VALUE = logical(1), pkg, function(x) isTRUE(requireNamespace(x, quietly = TRUE))))) {
+    utils::packageVersion(pkg)
+  } else {
+    0
+  }
 }

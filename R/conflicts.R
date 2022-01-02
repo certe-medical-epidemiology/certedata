@@ -23,78 +23,84 @@
 #' universe and other packages that you have loaded.
 #'
 #' @export
+#' @importFrom purrr set_names keep imap compact
 #' @examples
 #' certedata_conflicts()
 certedata_conflicts <- function() {
   envs <- grep("^package:", search(), value = TRUE)
-  envs <- purrr::set_names(envs)
+  envs <- set_names(envs)
   objs <- invert(lapply(envs, ls_env))
-
-  conflicts <- purrr::keep(objs, ~ length(.x) > 1)
-
+  
+  conflicts <- keep(objs, ~ length(.x) > 1)
+  
   tidy_names <- paste0("package:", certedata_packages())
-  conflicts <- purrr::keep(conflicts, ~ any(.x %in% tidy_names))
-
-  conflict_funs <- purrr::imap(conflicts, confirm_conflict)
-  conflict_funs <- purrr::compact(conflict_funs)
+  conflicts <- keep(conflicts, ~ any(.x %in% tidy_names))
+  
+  conflict_funs <- imap(conflicts, confirm_conflict)
+  conflict_funs <- compact(conflict_funs)
   
   # sort on package name, not on function name
-  tryCatch(
-    conflict_funs <- conflict_funs[names(sort(vapply(FUN.VALUE = character(1), conflict_funs, function(x) x[[1]])))],
-    error = function(e ) conflict_funs)
+  conflict_funs <- conflict_funs[names(sort(vapply(FUN.VALUE = character(1), conflict_funs, function(x) x[[1]])))]
   
   structure(conflict_funs, class = "certedata_conflicts")
 }
 
+#' @importFrom magrittr %>%
+#' @importFrom purrr map map_chr map2_chr
+#' @importFrom crayon bold blue silver italic green red
+#' @importFrom cli rule symbol
 certedata_conflict_message <- function(x) {
   if (length(x) == 0) return("")
-
-  header <- cli::rule(
-    left = crayon::bold("Conflicts"),
+  
+  header <- rule(
+    left = bold("Conflicts"),
     right = "certedata_conflicts()"
   )
   
-  pkgs <- x %>% purrr::map(~ gsub("^package:", "", .))
-  others <- pkgs %>% purrr::map(`[`, -1)
-  other_calls <- purrr::map2_chr(
+  pkgs <- x %>% map(~ gsub("^package:", "", .))
+  others <- pkgs %>% map(`[`, -1)
+  base_pkgs <- rownames(utils::installed.packages()[which(utils::installed.packages()[, "Priority"] == "base"), ])
+  other_calls <- map2_chr(
     others, names(others),
-    ~ paste0(crayon::blue(ifelse(!.x %in% base_pkgs,
-                                 crayon::red(.x),
-                                 .x)), "::", crayon::silver(paste0(.y, "()")), collapse = ", ")
+    ~ paste0(blue(ifelse(!.x %in% base_pkgs,
+                         red(.x),
+                         .x)), "::", silver(paste0(.y, "()")), collapse = ", ")
   )
   
-  winner <- pkgs %>% purrr::map_chr(1)
-  funs <- format(paste0(crayon::blue(winner), "::", crayon::green(paste0(names(x), "()"))))
+  winner <- pkgs %>% map_chr(1)
+  funs <- format(paste0(blue(winner), "::", green(paste0(names(x), "()"))))
   bullets <- paste0(
-    crayon::blue(cli::symbol$bullet), " ", funs,
-    crayon::italic(" masks "), other_calls,
+    blue(symbol$bullet), " ", funs,
+    italic(" masks "), other_calls,
     collapse = "\n"
   )
-
+  
   paste0(header, "\n", bullets)
 }
 
 #' @export
+#' @importFrom cli cat_line
 print.certedata_conflicts <- function(x, ..., startup = FALSE) {
-  cli::cat_line(certedata_conflict_message(x))
+  cat_line(certedata_conflict_message(x))
 }
 
 #' @importFrom magrittr %>%
+#' @importFrom purrr map keep
 confirm_conflict <- function(packages, name) {
-  # Only look at functions
+  # only look at functions
   objs <- packages %>%
-    purrr::map(~ get(name, pos = .)) %>%
-    purrr::keep(is.function)
-
+    map(~ get(name, pos = .)) %>%
+    keep(is.function)
+  
   if (length(objs) <= 1)
     return()
-
-  # Remove identical functions
+  
+  # remove identical functions
   objs <- objs[!duplicated(objs)]
   packages <- packages[!duplicated(packages)]
   if (length(objs) == 1)
     return()
-
+  
   packages
 }
 

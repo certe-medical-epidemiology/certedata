@@ -19,20 +19,21 @@
 
 core_all <- c(
   # these are loaded in alphabetical order
-  sort(c("AMR",
-         "cleaner",
-         "extrafont",
-         "skimr",
-         
-         # tidyverse:
-         "broom",
-         "dplyr",
-         "ggplot2",
-         "lubridate",
-         "purrr",
-         "stringr",
-         "tibble",
-         "tidyr")),
+  sort(c(
+    "AMR",
+    "cleaner",
+    "extrafont",
+    "skimr",
+    
+    # tidyverse
+    "broom",
+    "dplyr",
+    "ggplot2",
+    "lubridate",
+    "purrr",
+    "stringr",
+    "tibble",
+    "tidyr")),
   
   # then these are loaded afterwards, to prevent function conflicts
   "flextable", # after purrr, as flextable::compose() conflicts with purrr::compose()
@@ -47,73 +48,92 @@ core_all <- c(
   "certestats",
   "certestyle",
   "certetoolbox")
-installed <- core_all %in% rownames(utils::installed.packages())
-core_available <- core_all[which(installed)]
-core_unavailable <- core_all[which(!installed)]
 
-base_pkgs <- rownames(installed.packages()[which(installed.packages()[, "Priority"] == "base"), ])
-
-core_unloaded <- function() {
-  search <- paste0("package:", core_available)
-  core_available[!search %in% search()]
+get_loc <- function(pkg) {
+  if (pkg %in% loadedNamespaces()) {
+    dirname(getNamespaceInfo(pkg, "path"))
+  }  else {
+    NULL
+  }
 }
 
-# Attach the package from the same package library it was
-# loaded from before. https://github.com/certedata/certedata/issues/171
+# attach the package from the same package library it was loaded from before
 same_library <- function(pkg) {
-  loc <- if (pkg %in% loadedNamespaces()) dirname(getNamespaceInfo(pkg, "path"))
+  loc <- get_loc(pkg)
   do.call(
     "library",
     list(pkg, lib.loc = loc, character.only = TRUE, warn.conflicts = FALSE)
   )
 }
 
-certedata_attach <- function() {
-  to_load <- core_unloaded()
-  if (length(to_load) == 0)
-    return(invisible())
+is_installed <- function(pkgs = core_all) {
+  vapply(FUN.VALUE = logical(1),
+         pkgs,
+         function(pkg) pkg %in% rownames(utils::installed.packages(lib.loc = get_loc(pkg))),
+         USE.NAMES = FALSE)
+}
 
+get_core_available <- function(pkgs = core_all) {
+  pkgs[which(is_installed(pkgs))]
+}
+
+get_core_unavailable <- function(pkgs = core_all) {
+  pkgs[which(!is_installed(pkgs))]
+}
+
+#' @importFrom cli rule symbol
+#' @importFrom crayon bold green blue red col_align col_nchar
+certedata_attach <- function() {
+  
+  core_available <- get_core_available()
+  core_unavailable <- get_core_unavailable()
+  
+  to_load <- core_available[!paste0("package:", core_available) %in% search()]
+  if (length(to_load) == 0) {
+    return(invisible(TRUE))
+  }
+  
   msg(
-    cli::rule(
-      left = crayon::bold("Attaching packages"),
+    rule(
+      left = bold("Attaching packages"),
       right = paste0("certedata ", package_version("certedata"))
     ),
     startup = TRUE
   )
-
+  
   versions <- vapply(to_load, package_version, character(1))
   formatted <- format(c(to_load, core_unavailable))
-  packages <- paste(crayon::green(cli::symbol$tick), crayon::blue(formatted[seq_len(length(to_load))]))
+  packages <- paste(green(symbol$tick), blue(formatted[seq_len(length(to_load))]))
   if (length(core_unavailable) > 0) {
-    versions <- c(versions, rep(crayon::red("?.?.?"), length(core_unavailable)))
+    versions <- c(versions, rep(red("?.?.?"), length(core_unavailable)))
     packages <- c(packages,
-                  paste(crayon::red(cli::symbol$cross), crayon::red(formatted[seq(length(to_load) + 1, length(formatted))])))
+                  paste(red(symbol$cross), red(formatted[seq(length(to_load) + 1, length(formatted))])))
   }
-  packages <- paste0(packages, " ", crayon::col_align(versions, max(crayon::col_nchar(versions))))
+  packages <- paste0(packages, " ", col_align(versions, max(col_nchar(versions))))
   # sort on original order
-  ord <- order(core_all)
-  packages <- packages[ord]
+  packages <- packages[order(core_all[core_all %in% trimws(formatted)])]
   
   if (length(packages) %% 2 == 1) {
     packages <- append(packages, "")
   }
   col1 <- seq_len(length(packages) / 2)
   info <- paste0(packages[col1], "     ", packages[-col1])
-
+  
   msg(paste(info, collapse = "\n"), startup = TRUE)
-
+  
   suppressPackageStartupMessages(
     lapply(to_load, same_library)
   )
-
+  
   invisible(TRUE)
 }
 
+#' @importFrom crayon silver
 package_version <- function(x) {
   version <- as.character(unclass(utils::packageVersion(x))[[1]])
-
+  
   if (length(version) > 3) {
-    version[4:length(version)] <- crayon::silver(as.character(version[4:length(version)]))
+    version[4:length(version)] <- silver(as.character(version[4:length(version)]))
   }
   paste0(version, collapse = ".")
 }

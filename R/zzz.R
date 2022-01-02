@@ -17,27 +17,28 @@
 #  useful, but it comes WITHOUT ANY WARRANTY OR LIABILITY.              #
 # ===================================================================== #
 
+#' @importFrom crayon num_colors italic
 .onAttach <- function(...) {
+  core_available <- get_core_available()
   needed <- core_available[!is_attached(core_available)]
-  if (length(needed) == 0)
-    return()
-  
-  crayon::num_colors(TRUE)
-  tryCatch({
-    certedata_attach()
-    
-    if (!"package:conflicted" %in% search()) {
-      x <- certedata_conflicts()
-      msg(certedata_conflict_message(x), startup = TRUE)
-    }
-    
-    if (length(core_unavailable) > 0) {
-      msg(crayon::italic(paste0(ifelse(length(core_unavailable) == 1, 
-                                       "One package is",
-                                       "Some packages are"),
-                                " not installed, but should be loaded as part of the 'certedata' universe")),
-          startup = TRUE)
-    }
-  }, error = function(e) packageStartupMessage(e$message))
-  
+  if (length(needed) == 0) {
+    return(invisible())
+  }
+
+  num_colors(TRUE)
+  certedata_attach()
+
+  if (!"package:conflicted" %in% search()) {
+    x <- certedata_conflicts()
+    msg(certedata_conflict_message(x), startup = TRUE)
+  }
+
+  if (length(get_core_unavailable()) > 0) {
+    msg(italic(paste0(ifelse(length(get_core_unavailable()) == 1,
+                             "One package is",
+                             "Some packages are"),
+                      " not installed, but should be available as part of the 'certedata' universe")),
+        startup = TRUE)
+  }
+
 }
