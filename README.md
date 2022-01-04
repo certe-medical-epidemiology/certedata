@@ -7,7 +7,7 @@ You can [read the manual with explanation about all functions](https://certe-med
 ```r
 install.packages("certedata",
                  repos = "https://certe-medical-epidemiology.r-universe.dev",
-                 dependencies = TRUE).
+                 dependencies = TRUE)
 ```
 
 ## About the 'certedata' universe

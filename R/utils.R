@@ -81,12 +81,13 @@ certedata_install_packages <- function() {
             paste0(pkgs, collapse = ", "), ".")
     return(invisible())
   }
-  if (isTRUE(utils::askYesNo("This will install the following packages: ", paste0(pkgs, collapse = ", ")))) {
+  if (isTRUE(utils::askYesNo(paste("This will install the following packages:", paste0(pkgs, collapse = ", "))))) {
     for (pkg in pkgs) {
       tryCatch(utils::install.packages(pkg, repos = unique(c(options()$repos, "https://certe-medical-epidemiology.r-universe.dev"))),
                error = function(e) invisible())
     }
   }
+  msg("Run certedata_attach() to attach the newly installed package(s).")
   return(invisible())
 }
 

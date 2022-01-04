@@ -58,12 +58,17 @@ get_loc <- function(pkg) {
 }
 
 # attach the package from the same package library it was loaded from before
-same_library <- function(pkg) {
+attach_pkg <- function(pkg) {
   loc <- get_loc(pkg)
-  do.call(
-    "library",
-    list(pkg, lib.loc = loc, character.only = TRUE, warn.conflicts = FALSE)
-  )
+  tryCatch({
+    suppressPackageStartupMessages(
+      do.call(
+        "library",
+        list(pkg, lib.loc = loc, character.only = TRUE, warn.conflicts = FALSE)))
+    return(TRUE)
+  }, error = function(e) {
+    return(FALSE)
+  })
 }
 
 is_installed <- function(pkgs = core_all) {
@@ -88,26 +93,31 @@ certedata_attach <- function() {
   core_available <- get_core_available()
   core_unavailable <- get_core_unavailable()
   
-  to_load <- core_available[!paste0("package:", core_available) %in% search()]
-  if (length(to_load) == 0) {
+  to_attach <- core_available[!paste0("package:", core_available) %in% search()]
+  if (length(to_attach) == 0) {
     return(invisible(TRUE))
   }
   
   msg(
     rule(
-      left = bold("Attaching packages"),
+      left = bold("Attaching 'certedata'"),
       right = paste0("certedata ", package_version("certedata"))
     ),
     startup = TRUE
   )
   
-  versions <- vapply(to_load, package_version, character(1))
-  formatted <- format(c(to_load, core_unavailable))
-  packages <- paste(green(symbol$tick), blue(formatted[seq_len(length(to_load))]))
+  # the actual attaching
+  attach_success <- vapply(FUN.VALUE = logical(1), to_attach, attach_pkg)
+  
+  versions <- vapply(FUN.VALUE = character(1), to_attach, package_version)
+  formatted <- format(c(to_attach, core_unavailable))
+  packages <- c(paste(rep(green(symbol$tick), length(which(attach_success))), blue(formatted[which(attach_success)])),
+                paste(rep(red(symbol$cross), length(which(!attach_success))), blue(formatted[which(!attach_success)])))
+  
   if (length(core_unavailable) > 0) {
     versions <- c(versions, rep(red("?.?.?"), length(core_unavailable)))
     packages <- c(packages,
-                  paste(red(symbol$cross), red(formatted[seq(length(to_load) + 1, length(formatted))])))
+                  paste(red(symbol$cross), red(formatted[seq(length(to_attach) + 1, length(formatted))])))
   }
   packages <- paste0(packages, " ", col_align(versions, max(col_nchar(versions))))
   # sort on original order
@@ -121,11 +131,7 @@ certedata_attach <- function() {
   
   msg(paste(info, collapse = "\n"), startup = TRUE)
   
-  suppressPackageStartupMessages(
-    lapply(to_load, same_library)
-  )
-  
-  invisible(TRUE)
+  invisible(attach_success)
 }
 
 #' @importFrom crayon silver
