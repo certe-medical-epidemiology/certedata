@@ -17,6 +17,12 @@
 #  useful, but it comes WITHOUT ANY WARRANTY OR LIABILITY.              #
 # ===================================================================== #
 
+coverage:
+  # more than 70% coverage is unfeasible
+  range:
+  - 0.0
+  - 70.0
+
 ignore:
   - "R/conflicts.R"
   - "R/update.R"
