@@ -29,8 +29,11 @@ core_all <- c(
     "broom",
     "dplyr",
     "ggplot2",
+    "glue",
     "lubridate",
     "purrr",
+    "readr",
+    "readxl",
     "stringr",
     "tibble",
     "tidyr")),
@@ -88,7 +91,7 @@ get_core_unavailable <- function(pkgs = core_all) {
 
 #' @importFrom cli rule symbol
 #' @importFrom crayon bold green blue red col_align col_nchar
-certedata_attach <- function() {
+attach_all <- function() {
   
   core_available <- get_core_available()
   core_unavailable <- get_core_unavailable()
@@ -142,4 +145,44 @@ package_version <- function(x) {
     version[4:length(version)] <- silver(as.character(version[4:length(version)]))
   }
   paste0(version, collapse = ".")
+}
+
+#' Attach 'certedata' Universe Packages
+#' 
+#' @param ... unused at the moment
+#' @details This function attaches all 'certedata' universe R packages and their accompanying third-party packages.
+#' @export
+certedata_attach <- function(...) {
+  
+  startup <- isTRUE(list(...)$startup)
+  
+  attached <- attach_all()
+  
+  if (!"package:conflicted" %in% search()) {
+    x <- certedata_conflicts()
+    msg(certedata_conflict_message(x), startup = startup)
+  }
+  
+  pkg_plural <- function(n) {
+    ifelse(n == 1, "- This package", "- These packages")
+  }
+  
+  if (!all(attached) || length(get_core_unavailable()) > 0) {
+    msg(rule(left = bold("Notes")), startup = startup)
+    if (!all(attached)) {
+      msg(italic(red(paste0(pkg_plural(length(which(!attached))),
+                            " could not be attached due to missing dependencies:\n  ",
+                            paste(sort(names(attached)[which(!attached)]),
+                                  collapse = ", "), "."))),
+          startup = startup)
+    }
+    if (length(get_core_unavailable()) > 0) {
+      msg(italic(paste0(pkg_plural(length(get_core_unavailable())),
+                        " should be available as part of the 'certedata' universe:\n  ",
+                        paste(get_core_unavailable(), collapse = ", "),
+                        ".\n  => Run certedata_install_packages() to install.")),
+          startup = startup)
+    }
+  }
+  return(invisible(attached))
 }

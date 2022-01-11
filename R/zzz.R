@@ -27,32 +27,5 @@
   }
   
   num_colors(TRUE)
-  initialised <- certedata_attach()
-  
-  if (!"package:conflicted" %in% search()) {
-    x <- certedata_conflicts()
-    msg(certedata_conflict_message(x), startup = TRUE)
-  }
-  
-  pkg_plural <- function(n) {
-    ifelse(n == 1, "- This package", "- These packages")
-  }
-  
-  if (!all(initialised) || length(get_core_unavailable()) > 0) {
-    msg(rule(left = bold("Notes")), startup = TRUE)
-    if (!all(initialised)) {
-      msg(italic(red(paste0(pkg_plural(length(which(!initialised))),
-                            " could not be attached due to missing dependencies:\n  ",
-                            paste(sort(names(initialised)[which(!initialised)]),
-                                  collapse = ", "), "."))),
-          startup = TRUE)
-    }
-    if (length(get_core_unavailable()) > 0) {
-      msg(italic(paste0(pkg_plural(length(get_core_unavailable())),
-                        " should be available as part of the 'certedata' universe:\n  ",
-                        paste(get_core_unavailable(), collapse = ", "),
-                        ".\n  => Run certedata_install_packages() to install.")),
-          startup = TRUE)
-    }
-  }
+  certedata_attach(startup = TRUE)
 }

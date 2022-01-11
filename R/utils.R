@@ -72,6 +72,7 @@ certedata_packages <- function(only_installed = TRUE, include_self = TRUE) {
 #' @export
 certedata_install_packages <- function() {
   pkgs <- get_core_unavailable()
+  
   if (length(pkgs) == 0) {
     message("All required packages are already installed.")
     return(invisible())
@@ -81,6 +82,7 @@ certedata_install_packages <- function() {
             paste0(pkgs, collapse = ", "), ".")
     return(invisible())
   }
+  
   if (isTRUE(utils::askYesNo(paste("This will install the following packages:", paste0(pkgs, collapse = ", "))))) {
     for (pkg in pkgs) {
       tryCatch(utils::install.packages(pkg, repos = unique(c(options()$repos, "https://certe-medical-epidemiology.r-universe.dev"))),

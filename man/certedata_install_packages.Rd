@@ -28,8 +28,11 @@ These packages will be installed if not already:
 \item \code{extrafont}
 \item \code{flextable}
 \item \code{ggplot2}
+\item \code{glue}
 \item \code{lubridate}
 \item \code{purrr}
+\item \code{readr}
+\item \code{readxl}
 \item \code{skimr}
 \item \code{stringr}
 \item \code{tibble}
