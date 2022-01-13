@@ -10,7 +10,7 @@ certedata_install_packages()
 This function not only installs the 'certedata' universe, but also its accompanying third-party packages.
 }
 \details{
-These packages will be installed if not already:
+These 26 packages will be installed if not already:
 \itemize{
 \item \code{AMR}
 \item \code{broom}
@@ -27,6 +27,7 @@ These packages will be installed if not already:
 \item \code{dplyr}
 \item \code{extrafont}
 \item \code{flextable}
+\item \code{forcats}
 \item \code{ggplot2}
 \item \code{glue}
 \item \code{lubridate}

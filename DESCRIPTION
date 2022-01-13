@@ -1,6 +1,6 @@
 Package: certedata
 Title: A Certe R Package for Loading 'certedata' Universe
-Version: 4.2.4
+Version: 4.2.5
 Authors@R: c(
   person(given = c("Matthijs", "S."), 
          family = "Berends",
@@ -38,6 +38,7 @@ Suggests:
   dplyr,
   extrafont,
   flextable,
+  forcats,
   ggplot2,
   glue,
   lubridate,

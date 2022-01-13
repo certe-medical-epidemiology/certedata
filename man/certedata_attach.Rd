@@ -13,5 +13,7 @@ certedata_attach(...)
 Attach 'certedata' Universe Packages
 }
 \details{
-This function attaches all 'certedata' universe R packages and their accompanying third-party packages.
+This function attaches all 'certedata' universe R packages and their accompanying third-party packages (in total 26 packages).
+
+To install the packages, see \code{\link[=certedata_install_packages]{certedata_install_packages()}}.
 }

@@ -29,6 +29,7 @@ core_all <- c(
     "broom",
     "dplyr",
     "ggplot2",
+    "forcats",
     "glue",
     "lubridate",
     "purrr",
@@ -150,7 +151,9 @@ package_version <- function(x) {
 #' Attach 'certedata' Universe Packages
 #' 
 #' @param ... unused at the moment
-#' @details This function attaches all 'certedata' universe R packages and their accompanying third-party packages.
+#' @details This function attaches all 'certedata' universe R packages and their accompanying third-party packages (in total `r length(core_all)` packages).
+#' 
+#' To install the packages, see [certedata_install_packages()].
 #' @export
 certedata_attach <- function(...) {
   

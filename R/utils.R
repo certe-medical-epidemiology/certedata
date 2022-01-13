@@ -66,7 +66,7 @@ certedata_packages <- function(only_installed = TRUE, include_self = TRUE) {
 #' Install all packages required for the 'certedata' universe
 #' 
 #' This function not only installs the 'certedata' universe, but also its accompanying third-party packages.
-#' @details These packages will be installed if not already:
+#' @details These `r length(core_all)` packages will be installed if not already:
 #' 
 #' `r paste0(vapply(FUN.VALUE = character(1), sort(core_all), function(pkg) paste0("  * ``", pkg, "``")), collapse = "\n")`
 #' @export
