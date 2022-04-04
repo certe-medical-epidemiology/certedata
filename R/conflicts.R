@@ -21,20 +21,18 @@
 #'
 #' This function lists all the conflicts between packages in the 'certedata' universe and other packages that you have loaded.
 #' @export
-#' @importFrom purrr set_names keep imap compact
+#' @importFrom purrr keep imap compact
 #' @examples
 #' certedata_conflicts()
 certedata_conflicts <- function() {
   envs <- grep("^package:", search(), value = TRUE)
-  envs <- set_names(envs)
+  envs <- stats::setNames(envs, envs)
   objs <- invert(lapply(envs, ls_env))
   
-  conflicts <- keep(objs, ~ length(.x) > 1)
+  core_pkg <- paste0("package:", get_core_available())
+  conflcts <- objs[vapply(FUN.VALUE = logical(1), objs, function(x) length(x) > 1 & any(x %in% core_pkg))]
   
-  tidy_names <- paste0("package:", get_core_available())
-  conflicts <- keep(conflicts, ~ any(.x %in% tidy_names))
-  
-  conflict_funs <- imap(conflicts, confirm_conflict)
+  conflict_funs <- imap(conflcts, confirm_conflict)
   conflict_funs <- compact(conflict_funs)
   
   # sort on package name, not on function name
@@ -90,22 +88,24 @@ confirm_conflict <- function(packages, name) {
     map(~ get(name, pos = .)) %>%
     keep(is.function)
   
-  if (length(objs) <= 1)
-    return()
+  if (length(objs) <= 1) {
+    return(NULL)
+  }
   
-  # remove identical functions
-  objs <- objs[!duplicated(objs)]
-  packages <- packages[!duplicated(packages)]
-  if (length(objs) == 1)
-    return()
+  # remove identical functions, except if it's the old Certe package
+  keep_pkg <- which(!duplicated(objs) | ("package:certetools" %in% packages & length(packages) == 2))
+  if (length(keep_pkg) <= 1) {
+    return(NULL)
+  }
   
-  packages
+  packages[keep_pkg]
 }
 
 ls_env <- function(env) {
-  x <- ls(pos = env)
-  if (identical(env, "package:dplyr")) {
-    x <- setdiff(x, c("intersect", "setdiff", "setequal", "union"))
-  }
-  x
+  ls(pos = env)
+  # x <- ls(pos = env)
+  # if (identical(env, "package:dplyr")) {
+  #   x <- setdiff(x, c("intersect", "setdiff", "setequal", "union"))
+  # }
+  # x
 }

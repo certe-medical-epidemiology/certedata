@@ -17,6 +17,11 @@
 #  useful, but it comes WITHOUT ANY WARRANTY OR LIABILITY.              #
 # ===================================================================== #
 
+base <- c("graphics",
+          "grDevices",
+          "stats",
+          "utils")
+
 core_all <- c(
   # these are loaded in alphabetical order
   sort(c(
@@ -40,7 +45,7 @@ core_all <- c(
     "tidyr")),
   
   # then these are loaded afterwards, to prevent function conflicts
-  "flextable", # after purrr, as flextable::compose() conflicts with purrr::compose()
+  "flextable", # after 'purrr', as flextable::compose() conflicts with purrr::compose()
   "certetools", # old Certe pkg, to remove in later stage
   
   # then the 'certedata' universe packages are loaded, as their functions should overwrite any other functions:
@@ -52,6 +57,8 @@ core_all <- c(
   "certestats",
   "certestyle",
   "certetoolbox")
+
+core_certe <- core_all[grepl("^certe", core_all)]
 
 get_loc <- function(pkg) {
   if (pkg %in% loadedNamespaces()) {
@@ -65,10 +72,10 @@ get_loc <- function(pkg) {
 attach_pkg <- function(pkg) {
   loc <- get_loc(pkg)
   tryCatch({
-    suppressPackageStartupMessages(
+    suppressWarnings(suppressPackageStartupMessages(
       do.call(
-        "library",
-        list(pkg, lib.loc = loc, character.only = TRUE, warn.conflicts = FALSE)))
+        library,
+        list(pkg, lib.loc = loc, character.only = TRUE, warn.conflicts = FALSE))))
     return(TRUE)
   }, error = function(e) {
     return(FALSE)
@@ -102,6 +109,12 @@ attach_all <- function() {
     return(invisible(TRUE))
   }
   
+  # at start-up, R will only have 'base' loaded, not other base packages
+  # load them first, or our package will not overwrite their functions
+  if (any(!paste0("package:", base) %in% search())) {
+    to_attach <- c(to_attach, base[!paste0("package:", base) %in% search()])
+  }
+  
   msg(
     rule(
       left = bold("Attaching 'certedata'"),
@@ -110,8 +123,18 @@ attach_all <- function() {
     startup = TRUE
   )
   
+  if (any(to_attach %in% base)) {
+    msg(paste("Also loading from base R:",
+              paste(to_attach[to_attach %in% base], collapse = ", ")),
+        startup = TRUE)
+  }
+  
   # the actual attaching
   attach_success <- vapply(FUN.VALUE = logical(1), to_attach, attach_pkg)
+  
+  # remove the base packages from the list, they must be loaded silently
+  attach_success <- attach_success[!to_attach %in% base]
+  to_attach <- to_attach[!to_attach %in% base]
   
   versions <- vapply(FUN.VALUE = character(1), to_attach, package_version)
   formatted <- format(c(to_attach, core_unavailable))
@@ -123,6 +146,7 @@ attach_all <- function() {
     packages <- c(packages,
                   paste(red(symbol$cross), red(formatted[seq(length(to_attach) + 1, length(formatted))])))
   }
+  
   packages <- paste0(packages, " ", col_align(versions, max(col_nchar(versions))))
   # sort on original order
   packages <- packages[order(core_all[core_all %in% trimws(formatted)])]
