@@ -112,7 +112,7 @@ attach_all <- function() {
   # at start-up, R will only have 'base' loaded, not other base packages
   # load them first, or our package will not overwrite their functions
   if (any(!paste0("package:", base) %in% search())) {
-    to_attach <- c(to_attach, base[!paste0("package:", base) %in% search()])
+    to_attach <- c(base[!paste0("package:", base) %in% search()], to_attach)
   }
   
   msg(
@@ -124,7 +124,7 @@ attach_all <- function() {
   )
   
   if (any(to_attach %in% base)) {
-    msg(paste("Also loading from base R:",
+    msg(paste("Attaching first from base R:",
               paste(to_attach[to_attach %in% base], collapse = ", ")),
         startup = TRUE)
   }
