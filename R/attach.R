@@ -203,7 +203,7 @@ certedata_attach <- function(...) {
                                   collapse = ", "), "."))),
           startup = startup)
     }
-    if (length(get_core_unavailable()) > 0) {
+    if (length(get_core_unavailable()) > 0 && !all(get_core_unavailable() == "certetools")) {
       msg(italic(paste0(pkg_plural(length(get_core_unavailable())),
                         " should be available as part of the 'certedata' universe:\n  ",
                         paste(get_core_unavailable(), collapse = ", "),

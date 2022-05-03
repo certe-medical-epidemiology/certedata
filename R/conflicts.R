@@ -41,7 +41,6 @@ certedata_conflicts <- function() {
   structure(conflict_funs, class = "certedata_conflicts")
 }
 
-#' @importFrom magrittr %>%
 #' @importFrom purrr map map_chr map2_chr
 #' @importFrom crayon bold blue silver italic green red
 #' @importFrom cli rule symbol
@@ -53,8 +52,8 @@ certedata_conflict_message <- function(x) {
     right = "certedata_conflicts()"
   )
   
-  pkgs <- x %>% map(~ gsub("^package:", "", .))
-  others <- pkgs %>% map(`[`, -1)
+  pkgs <- x |> map(~ gsub("^package:", "", .))
+  others <- pkgs |> map(`[`, -1)
   base_pkgs <- rownames(utils::installed.packages()[which(utils::installed.packages()[, "Priority"] == "base"), ])
   other_calls <- map2_chr(
     others, names(others),
@@ -63,7 +62,7 @@ certedata_conflict_message <- function(x) {
                          .x)), "::", silver(paste0(.y, "()")), collapse = ", ")
   )
   
-  winner <- pkgs %>% map_chr(1)
+  winner <- pkgs |> map_chr(1)
   funs <- format(paste0(blue(winner), "::", green(paste0(names(x), "()"))))
   bullets <- paste0(
     blue(symbol$bullet), " ", funs,
@@ -80,12 +79,11 @@ print.certedata_conflicts <- function(x, ..., startup = FALSE) {
   cat_line(certedata_conflict_message(x))
 }
 
-#' @importFrom magrittr %>%
 #' @importFrom purrr map keep
 confirm_conflict <- function(packages, name) {
   # only look at functions
-  objs <- packages %>%
-    map(~ get(name, pos = .)) %>%
+  objs <- packages |>
+    map(~ get(name, pos = .)) |>
     keep(is.function)
   
   if (length(objs) <= 1) {
@@ -103,9 +101,4 @@ confirm_conflict <- function(packages, name) {
 
 ls_env <- function(env) {
   ls(pos = env)
-  # x <- ls(pos = env)
-  # if (identical(env, "package:dplyr")) {
-  #   x <- setdiff(x, c("intersect", "setdiff", "setequal", "union"))
-  # }
-  # x
 }
