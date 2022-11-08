@@ -195,7 +195,9 @@ certedata_attach <- function(...) {
   }
   
   if (!all(attached) || length(get_core_unavailable()) > 0) {
-    msg(rule(left = bold("Notes")), startup = startup)
+    if (!all(attached) || (length(get_core_unavailable()) > 0 && !all(get_core_unavailable() == "certetools"))) {
+      msg(rule(left = bold("Notes")), startup = startup)
+    }
     if (!all(attached)) {
       msg(italic(red(paste0(pkg_plural(length(which(!attached))),
                             " could not be attached due to missing dependencies:\n  ",
