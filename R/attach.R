@@ -29,7 +29,6 @@ core_all <- c(
     "cleaner",
     "extrafont",
     "skimr",
-    
     # tidyverse
     "broom",
     "dplyr",
@@ -46,7 +45,6 @@ core_all <- c(
   
   # then these are loaded afterwards, to prevent function conflicts
   "flextable", # after 'purrr', as flextable::compose() conflicts with purrr::compose()
-  "certetools", # old Certe pkg, to remove in later stage
   
   # then the 'certedata' universe packages are loaded, as their functions should overwrite any other functions:
   "certedb",
@@ -195,17 +193,17 @@ certedata_attach <- function(...) {
   }
   
   if (!all(attached) || length(get_core_unavailable()) > 0) {
-    if (!all(attached) || (length(get_core_unavailable()) > 0 && !all(get_core_unavailable() == "certetools"))) {
+    if (!all(attached) || (length(get_core_unavailable()) > 0)) {
       msg(rule(left = bold("Notes")), startup = startup)
     }
     if (!all(attached)) {
       msg(italic(red(paste0(pkg_plural(length(which(!attached))),
-                            " could not be attached due to missing dependencies:\n  ",
+                            " could not be attached:\n  ",
                             paste(sort(names(attached)[which(!attached)]),
                                   collapse = ", "), "."))),
           startup = startup)
     }
-    if (length(get_core_unavailable()) > 0 && !all(get_core_unavailable() == "certetools")) {
+    if (length(get_core_unavailable()) > 0) {
       msg(italic(paste0(pkg_plural(length(get_core_unavailable())),
                         " should be available as part of the 'certedata' universe:\n  ",
                         paste(get_core_unavailable(), collapse = ", "),

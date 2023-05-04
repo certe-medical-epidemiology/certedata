@@ -90,8 +90,8 @@ confirm_conflict <- function(packages, name) {
     return(NULL)
   }
   
-  # remove identical functions, except if it's the old Certe package
-  keep_pkg <- which(!duplicated(objs) | ("package:certetools" %in% packages & length(packages) == 2))
+  # remove identical functions
+  keep_pkg <- which(!duplicated(objs))
   if (length(keep_pkg) <= 1) {
     return(NULL)
   }
