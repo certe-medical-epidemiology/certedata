@@ -61,16 +61,23 @@ core_certe <- core_all[grepl("^certe", core_all)]
 get_loc <- function(pkg) {
   if (pkg %in% loadedNamespaces()) {
     dirname(getNamespaceInfo(pkg, "path"))
-  }  else {
+  } else {
     NULL
   }
 }
 
 # attach the package from the same package library it was loaded from before
-attach_pkg <- function(pkg) {
+#' @importFrom cli cli_progress_step
+attach_pkg <- function(pkg, silent = FALSE) {
   loc <- get_loc(pkg)
+  if (silent == FALSE) {
+    cli_progress_step("Loading {.pkg {pkg}}",
+                      msg_done = "Loaded {.pkg {pkg} {utils::packageVersion({pkg}, lib.loc = loc)}}",
+                      msg_failed = "Failed to load {.pkg {pkg}}")
+  }
   tryCatch({
     suppressWarnings(suppressPackageStartupMessages(
+      # use do.call() to prevent a note in R CMD CHECK about using library() in a package
       do.call(
         library,
         list(pkg, lib.loc = loc, character.only = TRUE, warn.conflicts = FALSE))))
@@ -95,9 +102,9 @@ get_core_unavailable <- function(pkgs = core_all) {
   pkgs[which(!is_installed(pkgs))]
 }
 
-#' @importFrom cli rule symbol
+#' @importFrom cli cli_rule cli_text
 #' @importFrom crayon bold green blue red col_align col_nchar
-attach_all <- function() {
+attach_all <- function(keep_silent = FALSE) {
   
   core_available <- get_core_available()
   core_unavailable <- get_core_unavailable()
@@ -113,61 +120,17 @@ attach_all <- function() {
     to_attach <- c(base[!paste0("package:", base) %in% search()], to_attach)
   }
   
-  msg(
-    rule(
-      left = bold("Attaching 'certedata'"),
-      right = paste0("certedata ", package_version("certedata"))
-    ),
-    startup = TRUE
-  )
-  
-  if (any(to_attach %in% base)) {
-    msg(paste("Attaching first from base R:",
-              paste(to_attach[to_attach %in% base], collapse = ", ")),
-        startup = TRUE)
+  if (keep_silent == FALSE) {
+    cli_rule(left = "Attaching {.pkg certedata}")
+    if (any(to_attach %in% base)) {
+      cli_text("Attaching first from base R: {.pkg {to_attach[to_attach %in% base]}}")
+    }
   }
   
   # the actual attaching
-  attach_success <- vapply(FUN.VALUE = logical(1), to_attach, attach_pkg)
-  
-  # remove the base packages from the list, they must be loaded silently
-  attach_success <- attach_success[!to_attach %in% base]
-  to_attach <- to_attach[!to_attach %in% base]
-  
-  versions <- vapply(FUN.VALUE = character(1), to_attach, package_version)
-  formatted <- format(c(to_attach, core_unavailable))
-  packages <- c(paste(rep(green(symbol$tick), length(which(attach_success))), blue(formatted[which(attach_success)])),
-                paste(rep(red(symbol$cross), length(which(!attach_success))), blue(formatted[which(!attach_success)])))
-  
-  if (length(core_unavailable) > 0) {
-    versions <- c(versions, rep(red("?.?.?"), length(core_unavailable)))
-    packages <- c(packages,
-                  paste(red(symbol$cross), red(formatted[seq(length(to_attach) + 1, length(formatted))])))
-  }
-  
-  packages <- paste0(packages, " ", col_align(versions, max(col_nchar(versions))))
-  # sort on original order
-  packages <- packages[order(core_all[core_all %in% trimws(formatted)])]
-  
-  if (length(packages) %% 2 == 1) {
-    packages <- append(packages, "")
-  }
-  col1 <- seq_len(length(packages) / 2)
-  info <- paste0(packages[col1], "     ", packages[-col1])
-  
-  msg(paste(info, collapse = "\n"), startup = TRUE)
+  attach_success <- vapply(FUN.VALUE = logical(1), to_attach, attach_pkg, silent = keep_silent)
   
   invisible(attach_success)
-}
-
-#' @importFrom crayon silver
-package_version <- function(x) {
-  version <- as.character(unclass(utils::packageVersion(x))[[1]])
-  
-  if (length(version) > 3) {
-    version[4:length(version)] <- silver(as.character(version[4:length(version)]))
-  }
-  paste0(version, collapse = ".")
 }
 
 #' Attach 'certedata' Universe Packages
@@ -179,36 +142,38 @@ package_version <- function(x) {
 #' @export
 certedata_attach <- function(...) {
   
-  startup <- isTRUE(list(...)$startup)
+  keep_silent <- isTRUE(list(...)$keep_silent)
+  attached <- attach_all(keep_silent = keep_silent)
   
-  attached <- attach_all()
-  
-  if (!"package:conflicted" %in% search()) {
+  if (!"package:conflicted" %in% search() && keep_silent == FALSE) {
     x <- certedata_conflicts()
-    msg(certedata_conflict_message(x), startup = startup)
+    overwritten_by_certe <- sum(vapply(FUN.VALUE = logical(1), x, function(x) x[1] %like% "^package:certe"), na.rm = TRUE)
+    if (overwritten_by_certe > 0) {
+      cli_rule(left = "Conflicts by Certe packages")
+      cli_text("Certe packages currently overwrite ", overwritten_by_certe,
+               " functions from other packages. Run {.fn certedata_conflicts} to view the full list.")
+    }
   }
   
   pkg_plural <- function(n) {
     ifelse(n == 1, "- This package", "- These packages")
   }
   
-  if (!all(attached) || length(get_core_unavailable()) > 0) {
-    if (!all(attached) || (length(get_core_unavailable()) > 0)) {
-      msg(rule(left = bold("Notes")), startup = startup)
-    }
+  if ((!all(attached) || length(get_core_unavailable()) > 0) && keep_silent == FALSE) {
+    cli_rule(left = "Notes")
     if (!all(attached)) {
       msg(italic(red(paste0(pkg_plural(length(which(!attached))),
                             " could not be attached:\n  ",
                             paste(sort(names(attached)[which(!attached)]),
                                   collapse = ", "), "."))),
-          startup = startup)
+          keep_silent = keep_silent)
     }
     if (length(get_core_unavailable()) > 0) {
       msg(italic(paste0(pkg_plural(length(get_core_unavailable())),
                         " should be available as part of the 'certedata' universe:\n  ",
                         paste(get_core_unavailable(), collapse = ", "),
                         ".\n  => Run certedata_install_packages() to install.")),
-          startup = startup)
+          keep_silent = keep_silent)
     }
   }
   return(invisible(attached))

@@ -17,10 +17,10 @@
 #  useful, but it comes WITHOUT ANY WARRANTY OR LIABILITY.              #
 # ===================================================================== #
 
-msg <- function(..., startup = FALSE) {
-  if (startup) {
+msg <- function(..., keep_silent = FALSE) {
+  if (keep_silent) {
     if (!isTRUE(getOption("certedata.quiet"))) {
-      packageStartupMessage(text_col(...))
+      packagekeep_silentMessage(text_col(...))
     }
   } else {
     message(text_col(...))

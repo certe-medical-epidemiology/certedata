@@ -1,6 +1,6 @@
 Package: certedata
 Title: A Certe R Package for Loading 'certedata' Universe
-Version: 4.3.0
+Version: 4.4.0
 Authors@R: c(
   person(given = c("Matthijs", "S."), 
          family = "Berends",
@@ -18,7 +18,7 @@ URL: https://certe-medical-epidemiology.github.io/certedata, https://github.com/
 Depends: 
   R (>= 4.1.0)
 Imports:
-  cli (>= 3.0.0),
+  cli (>= 3.6.0),
   crayon (>= 1.4.0),
   purrr (>= 0.3.0),
   rstudioapi (>= 0.10)

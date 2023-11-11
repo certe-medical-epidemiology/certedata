@@ -75,7 +75,7 @@ certedata_conflict_message <- function(x) {
 
 #' @export
 #' @importFrom cli cat_line
-print.certedata_conflicts <- function(x, ..., startup = FALSE) {
+print.certedata_conflicts <- function(x, ..., keep_silent = FALSE) {
   cat_line(certedata_conflict_message(x))
 }
 

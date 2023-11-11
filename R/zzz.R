@@ -27,5 +27,5 @@
   }
   
   num_colors(TRUE)
-  certedata_attach(startup = TRUE)
+  certedata_attach(keep_silent = !is.null(getOption("knitr.in.progress")))
 }
