@@ -67,10 +67,10 @@ get_loc <- function(pkg) {
 }
 
 # attach the package from the same package library it was loaded from before
-#' @importFrom cli cli_progress_step
+#' @importFrom cli cli_progress_step cli_text
 attach_pkg <- function(pkg, silent = FALSE) {
   loc <- get_loc(pkg)
-  if (silent == FALSE) {
+  if (silent == FALSE && interactive()) {
     cli_progress_step("Loading {.pkg {pkg}}",
                       msg_done = "Loaded {.pkg {pkg} {utils::packageVersion({pkg}, lib.loc = loc)}}",
                       msg_failed = "Failed to load {.pkg {pkg}}")
@@ -81,8 +81,10 @@ attach_pkg <- function(pkg, silent = FALSE) {
       do.call(
         library,
         list(pkg, lib.loc = loc, character.only = TRUE, warn.conflicts = FALSE))))
+    if (silent == FALSE && !interactive()) cli_text("Loaded {.pkg {pkg} {utils::packageVersion({pkg}, lib.loc = loc)}}")
     return(TRUE)
   }, error = function(e) {
+    if (silent == FALSE && !interactive()) cli_text("Failed to load {.pkg {pkg}}")
     return(FALSE)
   })
 }
