@@ -123,7 +123,7 @@ attach_all <- function(keep_silent = FALSE) {
   }
   
   if (keep_silent == FALSE) {
-    cli_rule(left = "Attaching {.pkg certedata}")
+    cli_rule(left = "Attaching {.pkg certedata {utils::packageVersion('certedata')}}")
     if (any(to_attach %in% base)) {
       cli_text("Attaching first from base R: {.pkg {to_attach[to_attach %in% base]}}")
     }
@@ -141,6 +141,7 @@ attach_all <- function(keep_silent = FALSE) {
 #' @details This function attaches all 'certedata' universe R packages and their accompanying third-party packages (in total `r length(core_all)` packages).
 #' 
 #' To install the packages, see [certedata_install_packages()].
+#' @importFrom cli cli_inform symbol
 #' @export
 certedata_attach <- function(...) {
   
@@ -150,10 +151,12 @@ certedata_attach <- function(...) {
   if (!"package:conflicted" %in% search() && keep_silent == FALSE) {
     x <- certedata_conflicts()
     overwritten_by_certe <- sum(vapply(FUN.VALUE = logical(1), x, function(x) x[1] %like% "^package:certe"), na.rm = TRUE)
-    if (overwritten_by_certe > 0) {
-      cli_rule(left = "Conflicts by Certe packages")
-      cli_text("Certe packages currently overwrite ", overwritten_by_certe,
-               " functions from other packages. Run {.fn certedata_conflicts} to view the full list.")
+    if (keep_silent == FALSE && overwritten_by_certe > 0) {
+      if (interactive()) {
+        cli_inform("{symbol$warning} Certe packages currently overwrite {overwritten_by_certe} functions from other packages. Run {.fn certedata_conflicts} to view the full list.")
+      } else {
+        print(certedata_conflicts())
+      }
     }
   }
   
