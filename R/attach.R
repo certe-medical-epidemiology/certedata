@@ -49,6 +49,7 @@ core_all <- c(
   # then the 'certedata' universe packages are loaded, as their functions should overwrite any other functions:
   "certedb",
   "certegis",
+  "certellm",
   "certemail",
   "certeplot2",
   "certeprojects",

@@ -21,7 +21,8 @@ Useful links:
 
 Authors:
 \itemize{
-  \item Erwin E. A. Hassing
+  \item Erwin E. A. Hassing \email{e.hassing@certe.nl}
+  \item Erwin Dijkstra \email{e.dijkstra@certe.nl}
 }
 
 Other contributors:
