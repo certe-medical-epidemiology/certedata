@@ -1,33 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://certe-medical-epidemiology.github.io/certedata/404.html</loc>
-  </url>
-  <url>
-    <loc>https://certe-medical-epidemiology.github.io/certedata/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://certe-medical-epidemiology.github.io/certedata/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://certe-medical-epidemiology.github.io/certedata/index.html</loc>
-  </url>
-  <url>
-    <loc>https://certe-medical-epidemiology.github.io/certedata/reference/certedata-package.html</loc>
-  </url>
-  <url>
-    <loc>https://certe-medical-epidemiology.github.io/certedata/reference/certedata_attach.html</loc>
-  </url>
-  <url>
-    <loc>https://certe-medical-epidemiology.github.io/certedata/reference/certedata_conflicts.html</loc>
-  </url>
-  <url>
-    <loc>https://certe-medical-epidemiology.github.io/certedata/reference/certedata_install_packages.html</loc>
-  </url>
-  <url>
-    <loc>https://certe-medical-epidemiology.github.io/certedata/reference/certedata_packages.html</loc>
-  </url>
-  <url>
-    <loc>https://certe-medical-epidemiology.github.io/certedata/reference/index.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://certe-medical-epidemiology.github.io/certedata/404.html</loc></url>
+<url><loc>https://certe-medical-epidemiology.github.io/certedata/LICENSE.html</loc></url>
+<url><loc>https://certe-medical-epidemiology.github.io/certedata/authors.html</loc></url>
+<url><loc>https://certe-medical-epidemiology.github.io/certedata/index.html</loc></url>
+<url><loc>https://certe-medical-epidemiology.github.io/certedata/reference/certedata-package.html</loc></url>
+<url><loc>https://certe-medical-epidemiology.github.io/certedata/reference/certedata_attach.html</loc></url>
+<url><loc>https://certe-medical-epidemiology.github.io/certedata/reference/certedata_conflicts.html</loc></url>
+<url><loc>https://certe-medical-epidemiology.github.io/certedata/reference/certedata_install_packages.html</loc></url>
+<url><loc>https://certe-medical-epidemiology.github.io/certedata/reference/certedata_packages.html</loc></url>
+<url><loc>https://certe-medical-epidemiology.github.io/certedata/reference/index.html</loc></url>
 </urlset>
+
